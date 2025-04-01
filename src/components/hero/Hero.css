@@ -1,0 +1,112 @@
+/* Main Container */
+.hero {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Hero Top (Background Image Section) */
+.heroTop {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroTop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This keeps the background image covering the area without distortion */
+}
+
+/* Hero Text */
+.heroMid {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.heroText {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    background: linear-gradient(90deg, #2a7317, #bfe0c0);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Hero Bottom (Image Slider Section) */
+.heroBottom {
+    position: relative;
+    margin-top: 20px;
+    overflow: hidden;
+    width: 100%;
+    background: #fff;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Instagram Profile Overlay - Centered on Slider */
+.instaProfile {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Perfect centering */
+    width: 450px; /* Increase width for larger image */
+    height: 220px; /* Increase height for larger image */
+    z-index: 10;
+}
+
+/* Rectangle Profile Image */
+.instaProfile img {
+    width: 100%;
+    height: 100%;
+    /* object-fit: contain; Prevent cropping, the image will be fully visible */
+    border-radius: 20px; /* Slightly rounded edges */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.instaProfile img:hover {
+    transform: scale(1.03);
+}
+
+
+/* Slider Container */
+.slider {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+}
+
+/* Moving Track */
+.slider-track {
+    display: flex;
+    width: calc(100% * 2);
+    animation: scroll 15s linear infinite;
+    align-items: center;
+}
+
+/* Individual Images - Vertical Rectangles */
+.slide {
+    width: 325px;
+    height: 400px;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin: 0 10px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Keyframes for Continuous Scrolling */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
