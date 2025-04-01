@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./Header.css"; // Import the CSS file
+import Logo from "../../assets/logo.png"
 
 const Header = () => {
   const [selectedMenu, setSelectedMenu] = useState("home");
@@ -18,7 +19,7 @@ const Header = () => {
     <header className="header">
       <div className="container">
         {/* Logo */}
-        <h1 className="logo">Logo</h1>
+        <img className="logo" src={Logo}/>
 
         {/* Search Bar */}
         <div className="search-bar">
