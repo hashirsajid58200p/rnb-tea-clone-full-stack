@@ -5,6 +5,8 @@ import Hero from "./components/hero/Hero.jsx"
 import About from './components/about/About.jsx'
 import Menu from "./components/menu/Menu.jsx"
 import MobileApp from './components/mobileapp/MobileApp.jsx'
+import JoinUs from './components/joinus/JoinUs.jsx'
+import Footer from './components/footer/Footer.jsx'
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
     <About/>
     <Menu/>
     <MobileApp/>
+    <JoinUs/>
+    <Footer/>
     </>
   )
 }
