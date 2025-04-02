@@ -1,0 +1,38 @@
+/* About Section */
+.aboutSection {
+    padding: 30px 20px; /* Add padding around the section */
+    text-align: center;
+  }
+  
+  .aboutContainer {
+    max-width: 1200px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content */
+  }
+  
+  .aboutSection h2 {
+    font-weight: 1000;
+    font-size: 60px;
+    color: #2a7317; /* Green color for the title */
+    margin-bottom: 20px; /* Space between the title and text */
+  }
+  
+  .aboutSection p {
+    font-size: 19px;
+    color: #333; /* Dark gray text */
+    line-height: 1.6; /* Better spacing between lines of text */
+    max-width: 800px; /* Limit the width of the text */
+    margin: 0 auto; /* Center the text */
+  }
+  
+  .aboutImageContainer {
+    margin-top: 10px;
+  }
+  
+  .aboutImage {
+    width: 100%;
+    max-width: 600px; /* Limit the max width of the image */
+    height: auto;
+    border-radius: 10px; /* Optional: for rounded corners */
+    margin: 0 auto; /* Center the image */
+  }
+  
