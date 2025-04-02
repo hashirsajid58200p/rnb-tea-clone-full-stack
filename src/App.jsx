@@ -4,6 +4,7 @@ import Header from "./components/header/Header.jsx"
 import Hero from "./components/hero/Hero.jsx"
 import About from './components/about/About.jsx'
 import Menu from "./components/menu/Menu.jsx"
+import MobileApp from './components/mobileapp/MobileApp.jsx'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <Hero/>
     <About/>
     <Menu/>
+    <MobileApp/>
     </>
   )
 }

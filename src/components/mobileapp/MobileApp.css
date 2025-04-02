@@ -1,0 +1,45 @@
+/* Wrapper for the whole component */
+.mobileAppWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: white; /* Set background to white */
+}
+
+/* Container to hold image and text */
+.mobileApp-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    gap: 5px; /* Decreased the gap between the image and text */
+}
+
+/* Image styling */
+.mobileApp-image {
+    width: 30%; /* Reduced the size of the image */
+    height: auto;
+    border-radius: 8px; /* Rounded corners for the image */
+}
+
+/* Text section styling */
+.mobileApp-text {
+    width: 65%; /* Increased width of the text to balance with smaller image */
+}
+
+/* Heading styling */
+.mobileApp-heading {
+    font-size: 2.5rem;
+    font-weight: 1000;
+    color: #2a7317; /* Updated heading color */
+    margin-bottom: 15px;
+}
+
+/* Paragraph styling */
+.mobileApp-paragraph {
+    font-size: 1.2rem;
+    color: #555; /* Slightly lighter color for paragraph */
+    line-height: 1.6;
+}
