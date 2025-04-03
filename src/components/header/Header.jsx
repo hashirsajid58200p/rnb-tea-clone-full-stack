@@ -52,13 +52,14 @@ const Header = () => {
         {/* Hamburger Menu Icon */}
         <FaBars className="hamburger-menu" onClick={toggleMenu} />
 
-        {/* Menu Popup */}
-        <div className={`menu-popup ${menuVisible ? "show" : ""}`}>
-          <ul className="mobile-menu">
+        {/* Sidebar (for small screen) */}
+        <div className={`sidebar ${menuVisible ? "show" : ""}`}>
+          <button className="close-sidebar" onClick={toggleMenu}>X</button>
+          <ul className="sidebar-menu">
             {menuItems.map((item) => (
               <li
                 key={item.id}
-                className="mobile-menu-item"
+                className="sidebar-menu-item"
                 onClick={() => {
                   setSelectedMenu(item.id);
                   setMenuVisible(false); // Close menu after clicking an item

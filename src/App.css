@@ -1,11 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Remove unwanted scrollbars */
+/* Global settings */
 body, html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Completely removes both scrollbars */
   width: 100vw;
   height: 100vh;
   font-family: Montserrat;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Hide vertical scrollbar but allow scrolling */
+body {
+  overflow-y: scroll; /* Ensure vertical scroll is enabled */
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari, Edge) */
+body::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar completely */
+}
+
+/* For Firefox */
+body {
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* For Internet Explorer and older Edge */
+body {
+  -ms-overflow-style: none;  /* Hides the scrollbar in IE and old Edge */
 }
