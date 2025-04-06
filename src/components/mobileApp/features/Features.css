@@ -1,0 +1,68 @@
+/* Features Section Wrapper */
+.features-wrapper {
+    background-color: #76be76;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  /* Features Section Heading */
+  .features-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 40px;
+  }
+  
+  /* Container for Features */
+  .features-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  /* Each Feature Box */
+  .feature {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .feature:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* Feature Icon */
+  .feature-icon {
+    font-size: 2.5rem;
+    color: #76be76;
+    margin-bottom: 15px;
+  }
+  
+  /* Feature Title */
+  .feature-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Feature Description */
+  .feature-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  /* Responsive Design for Small Screens */
+  @media (max-width: 768px) {
+    .feature {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+  

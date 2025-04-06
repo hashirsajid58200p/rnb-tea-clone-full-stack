@@ -1,7 +1,7 @@
 // About.jsx
 import React from "react";
 import "./About.css";
-import aboutImage from "../../assets/newOneFeatures.png"; // Replace with your own image path
+import aboutImage from "../../../assets/newOneFeatures.png"; // Replace with your own image path
 
 function About() {
   return (

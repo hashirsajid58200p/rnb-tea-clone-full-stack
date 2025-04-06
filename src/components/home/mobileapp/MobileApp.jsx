@@ -1,6 +1,6 @@
 import React from "react";
 import "./MobileApp.css";
-import appImage from "../../assets/mobile_cover.jpg"; // Make sure to replace this with your actual image path
+import appImage from "../../../assets/mobile_cover.jpg"; // Make sure to replace this with your actual image path
 
 function MobileApp() {
   return (

@@ -1,12 +1,12 @@
 import React from "react";
 import "./Hero.css";
-import heroTopImg from "../../assets/hero.png";
-import img1 from "../../assets/insta_hero_1.png";
-import img2 from "../../assets/insta_hero_2.png";
-import img3 from "../../assets/insta_hero_3.png";
-import img4 from "../../assets/insta_hero_4.png";
-import img5 from "../../assets/insta_hero_5.png";
-import profile from "../../assets/profile.png";
+import heroTopImg from "../../../assets/hero.png";
+import img1 from "../../../assets/insta_hero_1.png";
+import img2 from "../../../assets/insta_hero_2.png";
+import img3 from "../../../assets/insta_hero_3.png";
+import img4 from "../../../assets/insta_hero_4.png";
+import img5 from "../../../assets/insta_hero_5.png";
+import profile from "../../../assets/profile.png";
 
 const images = [img1, img2, img3, img4, img5];
 
