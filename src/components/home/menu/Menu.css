@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
-    background-color: #86b379; /* Background color for the section */
+    background-color: #007f08; /* Background color for the section */
 }
 
 /* Heading section */
@@ -17,7 +17,7 @@
 .menuList-heading h2 {
     font-size: 2.5rem; /* Size of the heading */
     font-weight: 1000; /* The specified font weight */
-    color: #333; /* Dark color for the text */
+    color: #ffffff; /* Dark color for the text */
 }
 
 /* Menu items container */
@@ -58,7 +58,7 @@
     left: 20px;
     font-size: 1.8rem;
     font-weight: bold;
-    color: green;
+    color: #007f08;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -66,7 +66,7 @@
     position: absolute;
     left: -100px; /* Initially hidden off to the left */
     bottom: 20px;
-    background: #2a7317; /* The desired color */
+    background: #007f08; /* The desired color */
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -92,8 +92,8 @@
 .view-more-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #2a7317; /* Button color */
-    color: white;
+    background-color: #ffffff; /* Button color */
+    color: #007f08;
     border: none; /* Remove border for the button */
     font-size: 1.5rem;
     border-radius: 5px;
@@ -101,5 +101,6 @@
 }
 
 .view-more-button:hover {
-    background-color: #245d12; /* Darken button on hover */
+    background-color: #ffffff;
+
 }

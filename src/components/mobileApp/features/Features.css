@@ -1,68 +1,72 @@
-/* Features Section Wrapper */
+.features-outer-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 50px;
+}
+
 .features-wrapper {
-    background-color: #76be76;
-    padding: 50px 20px;
-    text-align: center;
+  background-color: #2a7317;
+  width: 90%;
+  padding: 60px 20px;
+  text-align: center;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.features-heading {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature {
+  flex: 1 1 30%;
+  min-width: 250px;
+}
+
+.feature-icon {
+  font-size: 3.5rem;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.feature-description {
+  font-size: 1rem;
+  color: white;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  /* Features Section Heading */
-  .features-heading {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 40px;
-  }
-  
-  /* Container for Features */
-  .features-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  /* Each Feature Box */
+
   .feature {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 30%;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 400px;
   }
-  
-  .feature:hover {
-    transform: translateY(-10px);
+
+  .features-wrapper {
+    width: 100%;
+    border-radius: 0; /* Remove rounded corners on small screens */
   }
-  
-  /* Feature Icon */
-  .feature-icon {
-    font-size: 2.5rem;
-    color: #76be76;
-    margin-bottom: 15px;
-  }
-  
-  /* Feature Title */
-  .feature-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  /* Feature Description */
-  .feature-description {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.5;
-  }
-  
-  /* Responsive Design for Small Screens */
-  @media (max-width: 768px) {
-    .feature {
-      width: 100%;
-      margin-bottom: 30px;
-    }
-  }
-  
+}

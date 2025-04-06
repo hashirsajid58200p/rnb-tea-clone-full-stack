@@ -54,7 +54,9 @@ const Header = () => {
 
         {/* Sidebar (for small screen) */}
         <div className={`sidebar ${menuVisible ? "show" : ""}`}>
-          <button className="close-sidebar" onClick={toggleMenu}>X</button>
+          <button className="close-sidebar" onClick={toggleMenu}>
+            X
+          </button>
           <ul className="sidebar-menu">
             {menuItems.map((item) => (
               <li

@@ -1,10 +1,14 @@
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import MobileAppPage from "./MobileAppPage.jsx"
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import MobileAppPage from "./MobileAppPage.jsx";
+import ContactPage from "./ContactPage.jsx";
+import FranchisePage from "./FranchisePage.jsx";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <>
     <App />
-    <MobileAppPage/>
-  </>,
-)
+    <MobileAppPage />
+    <ContactPage />
+    <FranchisePage/>
+  </>
+);
