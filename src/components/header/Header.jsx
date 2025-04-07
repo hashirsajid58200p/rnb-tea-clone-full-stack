@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch, FaBars } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import "./Header.css";
 import Logo from "../../assets/logo.png";
 
 const Header = () => {
-  const [selectedMenu, setSelectedMenu] = useState("home");
   const [menuVisible, setMenuVisible] = useState(false);
+  const location = useLocation(); // Get the current location
 
   const menuItems = [
-    { name: "Home", id: "home" },
-    { name: "Menu", id: "menu" },
-    { name: "Locations", id: "locations" },
-    { name: "Mobile App", id: "mobileApp" },
-    { name: "Franchise", id: "franchise" },
-    { name: "Contact", id: "contact" },
+    { name: "Home", id: "home", path: "/" },
+    { name: "Menu", id: "menu", path: "/menu" },
+    { name: "Mobile App", id: "mobileApp", path: "/mobileApp" },
+    { name: "Franchise", id: "franchise", path: "/franchise" },
+    { name: "Contact", id: "contact", path: "/contact" },
   ];
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
+
+  // Set selected menu based on current path
+  const selectedMenu = menuItems.find((item) => item.path === location.pathname)?.id || "home";
 
   return (
     <header className="header">
@@ -41,9 +44,8 @@ const Header = () => {
                 className={`menu-item ${
                   selectedMenu === item.id ? "selected" : ""
                 }`}
-                onClick={() => setSelectedMenu(item.id)}
               >
-                {item.name}
+                <Link to={item.path}>{item.name}</Link>
               </li>
             ))}
           </ul>
@@ -62,12 +64,10 @@ const Header = () => {
               <li
                 key={item.id}
                 className="sidebar-menu-item"
-                onClick={() => {
-                  setSelectedMenu(item.id);
-                  setMenuVisible(false); // Close menu after clicking an item
-                }}
               >
-                {item.name}
+                <Link to={item.path} onClick={() => setMenuVisible(false)}>
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>

@@ -65,18 +65,36 @@
   padding: 10px 16px;
   cursor: pointer;
   transition: all 0.3s;
+  display: inline-flex; /* Ensure the button is full clickable */
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  background-color: transparent;
 }
 
 .menu-item:hover {
   background-color: #e6f7e3;
-  border-radius: 9999px;
 }
 
 .selected {
   background-color: #2a7317;
   color: white;
-  border-radius: 9999px;
   padding: 8px 16px;
+  border-radius: 9999px;
+}
+
+/* Remove underline and color change on click */
+.menu-item a {
+  text-decoration: none;
+  color: inherit; /* Inherit the text color from the parent */
+}
+
+.menu-item a:hover {
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+.selected a {
+  color: white; /* Keep the color white for selected menu item */
 }
 
 /* Hamburger Menu */
@@ -115,7 +133,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .sidebar-menu {
   list-style: none;
