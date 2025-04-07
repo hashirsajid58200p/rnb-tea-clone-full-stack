@@ -65,11 +65,12 @@
   padding: 10px 16px;
   cursor: pointer;
   transition: all 0.3s;
-  display: inline-flex; /* Ensure the button is full clickable */
+  display: inline-flex; /* Ensure the button is fully clickable */
   justify-content: center;
   align-items: center;
   border-radius: 9999px;
   background-color: transparent;
+  text-decoration: none; /* Remove underline */
 }
 
 .menu-item:hover {
@@ -83,6 +84,10 @@
   border-radius: 9999px;
 }
 
+.selected a {
+  color: white; /* Ensure selected link color is white */
+}
+
 /* Remove underline and color change on click */
 .menu-item a {
   text-decoration: none;
@@ -91,10 +96,6 @@
 
 .menu-item a:hover {
   text-decoration: none; /* Ensure no underline on hover */
-}
-
-.selected a {
-  color: white; /* Keep the color white for selected menu item */
 }
 
 /* Hamburger Menu */
@@ -172,5 +173,42 @@
   .hamburger-menu {
     display: block;
     margin-left: auto;
+  }
+
+  /* Ensure menu items are styled correctly on small screens */
+  .menu-item {
+    color: #2a7317; /* Set correct color */
+    text-decoration: none; /* Remove underline */
+  }
+
+  /* Fix issue with link colors turning purple on small screens */
+  .menu-item a {
+    color: #2a7317;
+    text-decoration: none; /* Remove underline */
+  }
+
+  .menu-item a:visited {
+    color: #2a7317; /* Set correct color for visited links */
+  }
+
+  .menu-item:hover {
+    background-color: #e6f7e3;
+  }
+
+  /* Ensure no purple color or underline for selected items on mobile */
+  .menu-item.selected {
+    background-color: #2a7317;
+    color: white;
+    padding: 8px 16px;
+  }
+
+  /* Fix for sidebar items - remove purple text and underline */
+  .sidebar-menu-item a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Ensure white color */
+  }
+
+  .sidebar-menu-item a:hover {
+    color: #e6f7e3; /* Change hover color */
   }
 }
