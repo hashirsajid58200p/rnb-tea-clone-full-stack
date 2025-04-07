@@ -32,13 +32,15 @@ import watermelonStormy from "../../assets/drinksMenu/watermelon_stormy.png";
 
 const drinksData = [
   {
+    id: "1",
     name: "Assam Black Tea (Cheese Cream)",
     category: "Cheese Cream",
     image: assamBlackTea,
     description:
       "A smooth and aromatic black tea with a rich layer of creamy cheese foam on top.",
   },
-  {
+  { 
+    id: "2",
     name: "Candy (Milk Tea)",
     category: "MilkTea",
     image: candyMilkTea,
@@ -46,6 +48,7 @@ const drinksData = [
       "A sweet and creamy milk tea with a hint of candy flavor, perfect for those with a sweet tooth.",
   },
   {
+    id: "3",
     name: "Caramel (Coffee)",
     category: "Coffee",
     image: caramelCoffee,
@@ -53,6 +56,7 @@ const drinksData = [
       "A rich and velvety coffee with a sweet caramel twist, ideal for caramel lovers.",
   },
   {
+    id: "4",
     name: "Classic (Milk Tea)",
     category: "MilkTea",
     image: classicMilkTea,
@@ -60,6 +64,7 @@ const drinksData = [
       "A timeless milk tea made with perfectly brewed tea and fresh milk, a classic favorite.",
   },
   {
+    id: "5",
     name: "Coconut (Coffee)",
     category: "Coffee",
     image: coconutCoffee,
@@ -67,6 +72,7 @@ const drinksData = [
       "A refreshing coffee blend infused with coconut for a tropical twist.",
   },
   {
+    id: "6",
     name: "Coconut Slush (Blended)",
     category: "Blended",
     image: coconutSlush,
@@ -74,6 +80,7 @@ const drinksData = [
       "A delicious coconut slush with a refreshing and creamy texture, perfect for a hot day.",
   },
   {
+    id: "7",
     name: "Coconut (Stormy)",
     category: "Stormy",
     image: coconutStormy,
@@ -81,6 +88,7 @@ const drinksData = [
       "A storm of coconut flavor, with smooth coconut cream and a touch of sweetness.",
   },
   {
+    id: "8",
     name: "Dragon Fruit Mango Slush (Blended)",
     category: "Blended",
     image: dragonFruitMangoSlush,
@@ -88,6 +96,7 @@ const drinksData = [
       "A vibrant and fruity slush made with dragon fruit and mango, a perfect tropical treat.",
   },
   {
+    id: "9",
     name: "Dragon Fruit (Stormy)",
     category: "Stormy",
     image: dragonFruitStormy,
@@ -95,6 +104,7 @@ const drinksData = [
       "A tangy and smooth drink made with dragon fruit, topped with a storm of creamy foam.",
   },
   {
+    id: "10",
     name: "Hazelnut (Coffee)",
     category: "Coffee",
     image: hazelnutCoffee,
@@ -102,6 +112,7 @@ const drinksData = [
       "A rich coffee flavored with roasted hazelnuts, perfect for nutty coffee enthusiasts.",
   },
   {
+    id: "11",
     name: "Honey Black (Milk Tea)",
     category: "MilkTea",
     image: honeyBlackMilkTea,
@@ -109,6 +120,7 @@ const drinksData = [
       "A smooth black milk tea infused with natural honey for a sweet and aromatic finish.",
   },
   {
+    id: "12",
     name: "Honeydew Slush (Blended)",
     category: "Blended",
     image: honeydewSlush,
@@ -116,6 +128,7 @@ const drinksData = [
       "A refreshing slush made with honeydew melon, giving it a light and fruity flavor.",
   },
   {
+    id: "13",
     name: "Honeydew (Stormy)",
     category: "Stormy",
     image: honeydewStormy,
@@ -123,6 +136,7 @@ const drinksData = [
       "A smooth and creamy honeydew drink, topped with a stormy foam that adds extra richness.",
   },
   {
+    id: "14",
     name: "Honey Green (Milk Tea)",
     category: "MilkTea",
     image: honeyGreenMilkTea,
@@ -130,6 +144,7 @@ const drinksData = [
       "A green tea milk tea sweetened with honey, offering a refreshing yet sweet beverage.",
   },
   {
+    id: "15",
     name: "House (Milk Tea)",
     category: "MilkTea",
     image: houseMilkTea,
@@ -137,6 +152,7 @@ const drinksData = [
       "A signature milk tea made with a special blend of tea and fresh milk, a must-try for all milk tea lovers.",
   },
   {
+    id: "16",
     name: "Jasmine Green Tea (Cheese Cream)",
     category: "Cheese Cream",
     image: jasmineGreenTea,
@@ -144,6 +160,7 @@ const drinksData = [
       "A fragrant jasmine green tea topped with a velvety cheese cream foam for a unique flavor.",
   },
   {
+    id: "17",
     name: "Lychee (Yakult)",
     category: "Yakult",
     image: lycheeYakult,
@@ -151,6 +168,7 @@ const drinksData = [
       "A refreshing lychee drink mixed with Yakult, perfect for those who love tropical flavors.",
   },
   {
+    id: "18",
     name: "Mangonada (Blended)",
     category: "Blended",
     image: mangonadaBlended,
@@ -158,6 +176,7 @@ const drinksData = [
       "A sweet and tangy mangonada slush with a spicy twist, a perfect treat for mango lovers.",
   },
   {
+    id: "19",
     name: "Mango Slush (Blended)",
     category: "Blended",
     image: mangoSlush,
@@ -165,6 +184,7 @@ const drinksData = [
       "A refreshing mango slush made with ripe mangoes, perfect for a tropical experience.",
   },
   {
+    id: "20",
     name: "Mango (Yakult)",
     category: "Yakult",
     image: mangoYakult,
@@ -172,6 +192,7 @@ const drinksData = [
       "A delicious mix of mango and Yakult for a sweet, tangy, and refreshing drink.",
   },
   {
+    id: "21",
     name: "Matcha (Stormy)",
     category: "Stormy",
     image: matchaStormy,
@@ -179,6 +200,7 @@ const drinksData = [
       "A matcha drink with a creamy stormy foam, offering a perfect balance of bitterness and creaminess.",
   },
   {
+    id: "22",
     name: "Oreo Chocolate (Stormy)",
     category: "Stormy",
     image: oreoChocolateStormy,
@@ -186,6 +208,7 @@ const drinksData = [
       "A rich and indulgent chocolate and Oreo drink, topped with a thick stormy foam.",
   },
   {
+    id: "23",
     name: "Oreo (Milk Tea)",
     category: "MilkTea",
     image: oreoMilkTea,
@@ -193,6 +216,7 @@ const drinksData = [
       "A creamy milk tea infused with crushed Oreos for a delicious, cookie-inspired drink.",
   },
   {
+    id: "24",
     name: "Peach (Yakult)",
     category: "Yakult",
     image: peachYakult,
@@ -200,6 +224,7 @@ const drinksData = [
       "A refreshing peach-flavored drink mixed with Yakult for a perfect balance of fruity and tangy.",
   },
   {
+    id: "25",
     name: "Strawberry (Yakult)",
     category: "Yakult",
     image: strawberryYakult,
@@ -207,6 +232,7 @@ const drinksData = [
       "A sweet strawberry drink blended with Yakult, offering a fruity and tangy combination.",
   },
   {
+    id: "26",
     name: "Taro (Stormy)",
     category: "Stormy",
     image: taroStormy,
@@ -214,6 +240,7 @@ const drinksData = [
       "A creamy taro drink with a stormy foam topping, combining sweetness with a touch of earthiness.",
   },
   {
+    id: "27",
     name: "Thai Tea (Blended)",
     category: "Blended",
     image: thaiTeaBlended,
@@ -221,12 +248,14 @@ const drinksData = [
       "A smooth and flavorful Thai tea slush, perfect for those who love a creamy tea-based drink.",
   },
   {
+    id: "28",
     name: "Thai Tea (Stormy)",
     category: "Stormy",
     image: thaiTeaStormy,
     description: "A bold and aromatic Thai tea topped with a rich stormy foam.",
   },
   {
+    id: "29",
     name: "Vietnamese (Coffee)",
     category: "Coffee",
     image: vietnameseCoffee,
@@ -234,6 +263,7 @@ const drinksData = [
       "A rich and strong Vietnamese coffee, perfect for those who enjoy an intense coffee experience.",
   },
   {
+    id: "30",
     name: "Watermelonada (Blended)",
     category: "Blended",
     image: watermelonadaBlended,
@@ -241,6 +271,7 @@ const drinksData = [
       "A refreshing watermelon slush with a hint of sweetness, perfect for a hot summer day.",
   },
   {
+    id: "31",
     name: "Watermelon (Stormy)",
     category: "Stormy",
     image: watermelonStormy,

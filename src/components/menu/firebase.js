@@ -1,8 +1,8 @@
 // firebase.js
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";  // Import Firestore
 
-// Your Firebase config
+// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDY9o467LFW_x073OT9Ao9vaEQ4SIWpYpQ",
   authDomain: "tea-project-3a349.firebaseapp.com",
@@ -13,7 +13,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // Initialize Firestore
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app(); // if already initialized
+}
 
-export { db };
+// Firestore instance
+const db = firebase.firestore(); 
+
+export { db };  // Export Firestore for use in other files
