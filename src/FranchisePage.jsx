@@ -10,7 +10,7 @@ const FranchisePage = () => {
       <Header />
       <RegForm />
       <LoginForm />
-      <Footer />
+      <Footer /> 
     </>
   );
 };

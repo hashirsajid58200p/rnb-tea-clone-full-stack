@@ -7,7 +7,7 @@ import img3 from "../../../assets/insta_hero_3.png";
 import img4 from "../../../assets/insta_hero_4.png";
 import img5 from "../../../assets/insta_hero_5.png";
 import profile from "../../../assets/profile.png";
-
+ 
 const images = [img1, img2, img3, img4, img5];
 
 function Hero() {

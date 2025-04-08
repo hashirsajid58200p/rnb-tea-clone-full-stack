@@ -11,6 +11,6 @@ const ContactPage = () => {
       <Footer />
     </>
   );
-};
+}; 
 
 export default ContactPage;

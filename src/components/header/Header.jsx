@@ -3,7 +3,7 @@ import { FaSearch, FaBars } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import "./Header.css";
 import Logo from "../../assets/logo.png";
-
+ 
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const location = useLocation(); // Get the current location

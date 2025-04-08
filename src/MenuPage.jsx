@@ -11,6 +11,6 @@ const MenuPage = () => {
     <Footer/>
     </>
   )
-}
+} 
 
 export default MenuPage

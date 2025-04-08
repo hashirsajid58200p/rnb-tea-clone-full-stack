@@ -1,3 +1,5 @@
+// drinksData.js
+
 import assamBlackTea from "../../assets/drinksMenu/assam black tea_cheese cream.png";
 import candyMilkTea from "../../assets/drinksMenu/candy_milktea.png";
 import caramelCoffee from "../../assets/drinksMenu/caramel_coffee.png";
@@ -36,14 +38,16 @@ const drinksData = [
     name: "Assam Black Tea (Cheese Cream)",
     category: "Cheese Cream",
     image: assamBlackTea,
+    price: 5.99,
     description:
       "A smooth and aromatic black tea with a rich layer of creamy cheese foam on top.",
   },
-  { 
+  {
     id: "2",
     name: "Candy (Milk Tea)",
     category: "MilkTea",
     image: candyMilkTea,
+    price: 4.99,
     description:
       "A sweet and creamy milk tea with a hint of candy flavor, perfect for those with a sweet tooth.",
   },
@@ -52,6 +56,7 @@ const drinksData = [
     name: "Caramel (Coffee)",
     category: "Coffee",
     image: caramelCoffee,
+    price: 5.49,
     description:
       "A rich and velvety coffee with a sweet caramel twist, ideal for caramel lovers.",
   },
@@ -60,6 +65,7 @@ const drinksData = [
     name: "Classic (Milk Tea)",
     category: "MilkTea",
     image: classicMilkTea,
+    price: 4.59,
     description:
       "A timeless milk tea made with perfectly brewed tea and fresh milk, a classic favorite.",
   },
@@ -68,6 +74,7 @@ const drinksData = [
     name: "Coconut (Coffee)",
     category: "Coffee",
     image: coconutCoffee,
+    price: 5.79,
     description:
       "A refreshing coffee blend infused with coconut for a tropical twist.",
   },
@@ -76,6 +83,7 @@ const drinksData = [
     name: "Coconut Slush (Blended)",
     category: "Blended",
     image: coconutSlush,
+    price: 5.29,
     description:
       "A delicious coconut slush with a refreshing and creamy texture, perfect for a hot day.",
   },
@@ -84,6 +92,7 @@ const drinksData = [
     name: "Coconut (Stormy)",
     category: "Stormy",
     image: coconutStormy,
+    price: 5.89,
     description:
       "A storm of coconut flavor, with smooth coconut cream and a touch of sweetness.",
   },
@@ -92,6 +101,7 @@ const drinksData = [
     name: "Dragon Fruit Mango Slush (Blended)",
     category: "Blended",
     image: dragonFruitMangoSlush,
+    price: 5.99,
     description:
       "A vibrant and fruity slush made with dragon fruit and mango, a perfect tropical treat.",
   },
@@ -100,6 +110,7 @@ const drinksData = [
     name: "Dragon Fruit (Stormy)",
     category: "Stormy",
     image: dragonFruitStormy,
+    price: 5.69,
     description:
       "A tangy and smooth drink made with dragon fruit, topped with a storm of creamy foam.",
   },
@@ -108,6 +119,7 @@ const drinksData = [
     name: "Hazelnut (Coffee)",
     category: "Coffee",
     image: hazelnutCoffee,
+    price: 5.49,
     description:
       "A rich coffee flavored with roasted hazelnuts, perfect for nutty coffee enthusiasts.",
   },
@@ -116,6 +128,7 @@ const drinksData = [
     name: "Honey Black (Milk Tea)",
     category: "MilkTea",
     image: honeyBlackMilkTea,
+    price: 4.89,
     description:
       "A smooth black milk tea infused with natural honey for a sweet and aromatic finish.",
   },
@@ -124,6 +137,7 @@ const drinksData = [
     name: "Honeydew Slush (Blended)",
     category: "Blended",
     image: honeydewSlush,
+    price: 5.39,
     description:
       "A refreshing slush made with honeydew melon, giving it a light and fruity flavor.",
   },
@@ -132,6 +146,7 @@ const drinksData = [
     name: "Honeydew (Stormy)",
     category: "Stormy",
     image: honeydewStormy,
+    price: 5.59,
     description:
       "A smooth and creamy honeydew drink, topped with a stormy foam that adds extra richness.",
   },
@@ -140,6 +155,7 @@ const drinksData = [
     name: "Honey Green (Milk Tea)",
     category: "MilkTea",
     image: honeyGreenMilkTea,
+    price: 4.79,
     description:
       "A green tea milk tea sweetened with honey, offering a refreshing yet sweet beverage.",
   },
@@ -148,6 +164,7 @@ const drinksData = [
     name: "House (Milk Tea)",
     category: "MilkTea",
     image: houseMilkTea,
+    price: 4.99,
     description:
       "A signature milk tea made with a special blend of tea and fresh milk, a must-try for all milk tea lovers.",
   },
@@ -156,6 +173,7 @@ const drinksData = [
     name: "Jasmine Green Tea (Cheese Cream)",
     category: "Cheese Cream",
     image: jasmineGreenTea,
+    price: 5.89,
     description:
       "A fragrant jasmine green tea topped with a velvety cheese cream foam for a unique flavor.",
   },
@@ -164,6 +182,7 @@ const drinksData = [
     name: "Lychee (Yakult)",
     category: "Yakult",
     image: lycheeYakult,
+    price: 5.19,
     description:
       "A refreshing lychee drink mixed with Yakult, perfect for those who love tropical flavors.",
   },
@@ -172,6 +191,7 @@ const drinksData = [
     name: "Mangonada (Blended)",
     category: "Blended",
     image: mangonadaBlended,
+    price: 5.99,
     description:
       "A sweet and tangy mangonada slush with a spicy twist, a perfect treat for mango lovers.",
   },
@@ -180,6 +200,7 @@ const drinksData = [
     name: "Mango Slush (Blended)",
     category: "Blended",
     image: mangoSlush,
+    price: 5.39,
     description:
       "A refreshing mango slush made with ripe mangoes, perfect for a tropical experience.",
   },
@@ -188,6 +209,7 @@ const drinksData = [
     name: "Mango (Yakult)",
     category: "Yakult",
     image: mangoYakult,
+    price: 5.09,
     description:
       "A delicious mix of mango and Yakult for a sweet, tangy, and refreshing drink.",
   },
@@ -196,6 +218,7 @@ const drinksData = [
     name: "Matcha (Stormy)",
     category: "Stormy",
     image: matchaStormy,
+    price: 5.99,
     description:
       "A matcha drink with a creamy stormy foam, offering a perfect balance of bitterness and creaminess.",
   },
@@ -204,6 +227,7 @@ const drinksData = [
     name: "Oreo Chocolate (Stormy)",
     category: "Stormy",
     image: oreoChocolateStormy,
+    price: 5.89,
     description:
       "A rich and indulgent chocolate and Oreo drink, topped with a thick stormy foam.",
   },
@@ -212,6 +236,7 @@ const drinksData = [
     name: "Oreo (Milk Tea)",
     category: "MilkTea",
     image: oreoMilkTea,
+    price: 5.49,
     description:
       "A creamy milk tea infused with crushed Oreos for a delicious, cookie-inspired drink.",
   },
@@ -220,6 +245,7 @@ const drinksData = [
     name: "Peach (Yakult)",
     category: "Yakult",
     image: peachYakult,
+    price: 5.09,
     description:
       "A refreshing peach-flavored drink mixed with Yakult for a perfect balance of fruity and tangy.",
   },
@@ -228,6 +254,7 @@ const drinksData = [
     name: "Strawberry (Yakult)",
     category: "Yakult",
     image: strawberryYakult,
+    price: 5.19,
     description:
       "A sweet strawberry drink blended with Yakult, offering a fruity and tangy combination.",
   },
@@ -236,6 +263,7 @@ const drinksData = [
     name: "Taro (Stormy)",
     category: "Stormy",
     image: taroStormy,
+    price: 5.79,
     description:
       "A creamy taro drink with a stormy foam topping, combining sweetness with a touch of earthiness.",
   },
@@ -244,6 +272,7 @@ const drinksData = [
     name: "Thai Tea (Blended)",
     category: "Blended",
     image: thaiTeaBlended,
+    price: 5.39,
     description:
       "A smooth and flavorful Thai tea slush, perfect for those who love a creamy tea-based drink.",
   },
@@ -252,13 +281,16 @@ const drinksData = [
     name: "Thai Tea (Stormy)",
     category: "Stormy",
     image: thaiTeaStormy,
-    description: "A bold and aromatic Thai tea topped with a rich stormy foam.",
+    price: 5.69,
+    description:
+      "A bold and aromatic Thai tea topped with a rich stormy foam.",
   },
   {
     id: "29",
     name: "Vietnamese (Coffee)",
     category: "Coffee",
     image: vietnameseCoffee,
+    price: 5.99,
     description:
       "A rich and strong Vietnamese coffee, perfect for those who enjoy an intense coffee experience.",
   },
@@ -267,6 +299,7 @@ const drinksData = [
     name: "Watermelonada (Blended)",
     category: "Blended",
     image: watermelonadaBlended,
+    price: 5.29,
     description:
       "A refreshing watermelon slush with a hint of sweetness, perfect for a hot summer day.",
   },
@@ -275,6 +308,7 @@ const drinksData = [
     name: "Watermelon (Stormy)",
     category: "Stormy",
     image: watermelonStormy,
+    price: 5.59,
     description:
       "A smooth and creamy watermelon drink, topped with a delicious stormy foam.",
   },

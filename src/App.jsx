@@ -7,7 +7,7 @@ import Menu from "./components/home/menu/Menu.jsx";
 import MobileApp from "./components/home/mobileapp/MobileApp.jsx";
 import JoinUs from "./components/home/joinus/JoinUs.jsx";
 import Footer from "./components/footer/Footer.jsx";
-
+ 
 function App() {
   return (
     <>

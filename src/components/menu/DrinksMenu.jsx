@@ -3,6 +3,7 @@ import './DrinksMenu.css';
 import drinksData from './drinksData'; // Importing drinks data with images
 import { db } from './firebase'; // Firebase setup
 import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore';
+import Basket from './Basket'; // Import Basket component
 
 const DrinksMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -11,6 +12,9 @@ const DrinksMenu = () => {
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [basket, setBasket] = useState([]);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false); // New state for success popup
+  const [addedDrinkName, setAddedDrinkName] = useState(''); // Track the added drink's name
 
   const categories = ['All', ...new Set(drinksData.map(drink => drink.category))];
 
@@ -74,6 +78,28 @@ const DrinksMenu = () => {
     }
   };
 
+  // Add item to the basket with quantity support and show success popup
+  const addToBasket = (drink) => {
+    setBasket(prevBasket => {
+      const existingItem = prevBasket.find(item => item.id === drink.id);
+      if (existingItem) {
+        // If item exists, increase quantity
+        return prevBasket.map(item =>
+          item.id === drink.id
+            ? { ...item, quantity: (item.quantity || 1) + 1 }
+            : item
+        );
+      }
+      // Otherwise, add new item with quantity 1
+      return [...prevBasket, { ...drink, quantity: 1 }];
+    });
+    // Show success popup with drink name
+    setAddedDrinkName(drink.name);
+    setShowSuccessPopup(true);
+    // Auto-hide popup after 2 seconds
+    setTimeout(() => setShowSuccessPopup(false), 2000);
+  };
+
   return (
     <div className="drinks-menu">
       <h1>Drinks Menu</h1>
@@ -103,10 +129,30 @@ const DrinksMenu = () => {
                 alt={drink.name}
               />
               <p>{drink.name}</p>
+              {/* Price Display */}
+              <p className="drink-price">${drink.price}</p> {/* Display the price */}
+              
+              {/* Add to Basket Button with Font Awesome Icon */}
+              <button className="add-to-basket" onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering the card popup
+                addToBasket(drink);
+              }}>
+                <i className="fa fa-shopping-cart"></i> Add to Basket
+              </button>
             </div>
           ))}
         </main>
       </div>
+
+      {/* Display the Basket component */}
+      <Basket basket={basket} setBasket={setBasket} />
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <p>{addedDrinkName} successfully added to cart!</p>
+        </div>
+      )}
 
       {selectedDrink && (
         <div className="popup-overlay" onClick={closePopup}>
