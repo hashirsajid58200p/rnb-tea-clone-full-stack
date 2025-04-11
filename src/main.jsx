@@ -10,7 +10,8 @@ import MobileAppPage from './MobileAppPage.jsx';
 import FranchisePage from './FranchisePage.jsx';
 import ContactPage from './ContactPage.jsx';
 import OrderSummary from './components/menu/order/OrderSummary.jsx';
-import ThankYou from './components/menu/thankyou/ThanksYou.jsx'; // New import
+import Checkout from './components/menu/checkout/CheckOut.jsx'; // New import
+import ThankYou from './components/menu/thankyou/ThanksYou.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BasketProvider>
@@ -22,7 +23,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/franchise" element={<FranchisePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/order" element={<OrderSummary />} />
-        <Route path="/thank-you" element={<ThankYou />} /> {/* New route */}
+        <Route path="/checkout" element={<Checkout />} /> {/* New route */}
+        <Route path="/thank-you" element={<ThankYou />} />
       </Routes>
     </BrowserRouter>
   </BasketProvider>
