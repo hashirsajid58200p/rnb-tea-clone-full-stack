@@ -105,6 +105,7 @@
     cursor: pointer;
     font-size: 1.2rem;
     transition: background-color 0.3s ease;
+    margin-left: 10px; /* Small gap from quantity controls */
   }
   
   .remove-btn:hover {
@@ -199,18 +200,24 @@
     }
   
     .order-summary-item {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row; /* Keep horizontal layout */
+      flex-wrap: wrap; /* Allow wrapping if needed */
+      align-items: center;
       gap: 10px;
     }
   
     .item-details {
       flex-direction: column;
       align-items: flex-start;
+      flex: 1; /* Take available space */
     }
   
     .quantity-controls {
-      margin: 10px 0;
+      gap: 8px; /* Slightly smaller gap for mobile */
+    }
+  
+    .remove-btn {
+      margin-left: 10px; /* Consistent small gap */
     }
   
     .checkout-form {
@@ -232,6 +239,10 @@
     .remove-btn {
       width: 25px;
       height: 25px;
+      font-size: 1rem;
+    }
+  
+    .quantity-controls span {
       font-size: 1rem;
     }
   
