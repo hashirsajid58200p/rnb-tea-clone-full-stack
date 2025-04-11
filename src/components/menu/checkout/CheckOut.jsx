@@ -92,7 +92,7 @@ const Checkout = () => {
           <div className="line" />
           <div className="step">
             <span className="circle">3</span>
-            <span className="step-label">Payment</span>
+            <span className="step-label">Purchase</span>
           </div>
         </div>
 
@@ -210,7 +210,7 @@ const Checkout = () => {
                 className="continue-btn"
                 onClick={handleContinueToPayment}
               >
-                Continue to Payment
+                Continue to Purchase
               </button>
             </div>
           </div>
