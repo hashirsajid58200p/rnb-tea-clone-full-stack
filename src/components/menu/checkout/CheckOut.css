@@ -23,13 +23,41 @@
   }
   
   .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-size: 1.1rem;
     color: #666;
   }
   
   .step.active {
     color: #2a7317;
-    font-weight: bold;
+  }
+  
+  .circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  
+  .step.active .circle {
+    background: #2a7317;
+  }
+  
+  .step-label {
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  .step.active .step-label {
+    color: #2a7317;
   }
   
   .line {
@@ -210,6 +238,12 @@
   
     .progress-bar {
       font-size: 1rem;
+    }
+  
+    .circle {
+      width: 20px;
+      height: 20px;
+      font-size: 0.9rem;
     }
   
     .order-item-image {

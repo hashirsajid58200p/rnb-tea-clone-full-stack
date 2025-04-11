@@ -36,7 +36,6 @@ const Checkout = () => {
   };
 
   const applyCoupon = () => {
-    // Placeholder: Add coupon logic here if needed
     alert('Coupon functionality not implemented yet.');
   };
 
@@ -65,10 +64,11 @@ const Checkout = () => {
     navigate('/thank-you', {
       state: {
         orderId,
+        trackingNumber: Math.floor(100000000000 + Math.random() * 900000000000), // 12 digits
         customer: {
           name: `${formData.firstName} ${formData.lastName}`,
           email: formData.email,
-          phone: '', // No phone in this form, keeping for compatibility
+          phone: '',
         },
         basket,
         totalPrice: total,
@@ -81,14 +81,19 @@ const Checkout = () => {
       <div className="checkout-form-side">
         <div className="progress-bar">
           <div className={step >= 1 ? 'step active' : 'step'}>
-            {step > 1 ? '✔' : '1'} Information
+            <span className="circle">{step > 1 ? '✔' : '1'}</span>
+            <span className="step-label">Information</span>
           </div>
           <div className="line" />
           <div className={step >= 2 ? 'step active' : 'step'}>
-            2 Shipping
+            <span className="circle">2</span>
+            <span className="step-label">Shipping</span>
           </div>
           <div className="line" />
-          <div className="step">3 Payment</div>
+          <div className="step">
+            <span className="circle">3</span>
+            <span className="step-label">Payment</span>
+          </div>
         </div>
 
         {step === 1 && (
@@ -241,7 +246,7 @@ const Checkout = () => {
           </div>
           <div className="total-row">
             <span>Shipping</span>
-            <span>{shippingFee > 0 ? `$${shippingFee.toFixed(2)}` : 'TBD'}</span>
+            <span>${shippingFee.toFixed(2)}</span>
           </div>
           <div className="total-row">
             <span>Discount</span>

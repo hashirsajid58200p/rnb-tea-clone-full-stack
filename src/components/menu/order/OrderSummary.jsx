@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './OrderSummary.css';
-import { BasketContext } from '../../../context/BasketContext.jsx';
+import { BasketContext } from '../../../context/BasketContext';
 
 const OrderSummary = () => {
   const { basket, setBasket } = useContext(BasketContext);
@@ -54,7 +54,7 @@ const OrderSummary = () => {
         </div>
       ) : (
         <div className="order-summary-layout">
-          <div className="order-images">
+          <div className={`order-images ${basket.length === 1 ? 'single-item' : ''}`}>
             {basket.map((item) => (
               <img
                 key={item.id}
@@ -88,18 +88,20 @@ const OrderSummary = () => {
                 <strong>Total: ${totalPrice}</strong>
               </div>
             </div>
-            <button
-              className="checkout-btn"
-              onClick={handleCheckout}
-            >
-              Checkout
-            </button>
-            <button
-              className="back-btn"
-              onClick={() => navigate('/menu')}
-            >
-              Back to Menu
-            </button>
+            <div className="button-group">
+              <button
+                className="back-btn"
+                onClick={() => navigate('/menu')}
+              >
+                Back to Menu
+              </button>
+              <button
+                className="checkout-btn"
+                onClick={handleCheckout}
+              >
+                Checkout
+              </button>
+            </div>
           </div>
         </div>
       )}
