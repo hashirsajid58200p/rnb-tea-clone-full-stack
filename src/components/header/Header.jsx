@@ -3,7 +3,7 @@ import { FaSearch, FaBars } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import "./Header.css";
 import Logo from "../../assets/logo.png";
- 
+
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const location = useLocation(); // Get the current location
@@ -21,7 +21,8 @@ const Header = () => {
   };
 
   // Set selected menu based on current path
-  const selectedMenu = menuItems.find((item) => item.path === location.pathname)?.id || "home";
+  const selectedMenu =
+    menuItems.find((item) => item.path === location.pathname)?.id || "home";
 
   return (
     <header className="header">
@@ -61,10 +62,7 @@ const Header = () => {
           </button>
           <ul className="sidebar-menu">
             {menuItems.map((item) => (
-              <li
-                key={item.id}
-                className="sidebar-menu-item"
-              >
+              <li key={item.id} className="sidebar-menu-item">
                 <Link to={item.path} onClick={() => setMenuVisible(false)}>
                   {item.name}
                 </Link>
