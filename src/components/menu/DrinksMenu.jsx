@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
+// src/components/menu/DrinksMenu.jsx
+import React, { useState, useEffect, useContext } from 'react';
 import './DrinksMenu.css';
-import drinksData from './drinksData'; // Importing drinks data with images
-import { db } from './firebase'; // Firebase setup
+import drinksData from './drinksData';
+import { db } from './firebase';
 import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore';
-import Basket from './Basket'; // Import Basket component
+import Basket from './Basket';
+import { BasketContext } from '../../context/BasketContext.jsx';
 
 const DrinksMenu = () => {
+  const { basket, setBasket } = useContext(BasketContext);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedDrink, setSelectedDrink] = useState(null);
   const [activeTab, setActiveTab] = useState('Description');
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [basket, setBasket] = useState([]);
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false); // New state for success popup
-  const [addedDrinkName, setAddedDrinkName] = useState(''); // Track the added drink's name
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [addedDrinkName, setAddedDrinkName] = useState('');
 
   const categories = ['All', ...new Set(drinksData.map(drink => drink.category))];
 
@@ -23,7 +25,6 @@ const DrinksMenu = () => {
       ? drinksData
       : drinksData.filter(drink => drink.category === selectedCategory);
 
-  // Fetch reviews when a drink is selected
   const openPopup = async (drink) => {
     setSelectedDrink(drink);
     setActiveTab('Description');
@@ -47,7 +48,6 @@ const DrinksMenu = () => {
     setNewReview('');
   };
 
-  // Handle review submission
   const handleReviewSubmit = async () => {
     if (!selectedDrink || newReview.trim() === '') return;
 
@@ -78,25 +78,18 @@ const DrinksMenu = () => {
     }
   };
 
-  // Add item to the basket with quantity support and show success popup
   const addToBasket = (drink) => {
     setBasket(prevBasket => {
       const existingItem = prevBasket.find(item => item.id === drink.id);
       if (existingItem) {
-        // If item exists, increase quantity
-        return prevBasket.map(item =>
-          item.id === drink.id
-            ? { ...item, quantity: (item.quantity || 1) + 1 }
-            : item
-        );
+        // If the drink is already in the basket, don’t add it again or increase quantity
+        return prevBasket; // Return unchanged basket
       }
-      // Otherwise, add new item with quantity 1
+      // Add the drink with quantity 1 only if it’s not already in the basket
       return [...prevBasket, { ...drink, quantity: 1 }];
     });
-    // Show success popup with drink name
     setAddedDrinkName(drink.name);
     setShowSuccessPopup(true);
-    // Auto-hide popup after 2 seconds
     setTimeout(() => setShowSuccessPopup(false), 2000);
   };
 
@@ -124,19 +117,16 @@ const DrinksMenu = () => {
               className="drink-card"
               onClick={() => openPopup(drink)}
             >
-              <img
-                src={drink.image} // Use the imported image directly from drinksData
-                alt={drink.name}
-              />
+              <img src={drink.image} alt={drink.name} />
               <p>{drink.name}</p>
-              {/* Price Display */}
-              <p className="drink-price">${drink.price}</p> {/* Display the price */}
-              
-              {/* Add to Basket Button with Font Awesome Icon */}
-              <button className="add-to-basket" onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering the card popup
-                addToBasket(drink);
-              }}>
+              <p className="drink-price">${drink.price}</p>
+              <button
+                className="add-to-basket"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToBasket(drink);
+                }}
+              >
                 <i className="fa fa-shopping-cart"></i> Add to Basket
               </button>
             </div>
@@ -144,10 +134,8 @@ const DrinksMenu = () => {
         </main>
       </div>
 
-      {/* Display the Basket component */}
-      <Basket basket={basket} setBasket={setBasket} />
+      <Basket />
 
-      {/* Success Popup */}
       {showSuccessPopup && (
         <div className="success-popup">
           <p>{addedDrinkName} successfully added to cart!</p>
@@ -157,9 +145,7 @@ const DrinksMenu = () => {
       {selectedDrink && (
         <div className="popup-overlay" onClick={closePopup}>
           <div className="popup-card" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={closePopup}>
-              ×
-            </button>
+            <button className="close-btn" onClick={closePopup}>×</button>
             <h2>{selectedDrink.name}</h2>
             <div className="popup-tabs">
               <button
