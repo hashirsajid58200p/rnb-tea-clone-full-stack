@@ -1,59 +1,82 @@
-// src/menu/order/OrderSummary.jsx
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './OrderSummary.css';
-import { BasketContext } from '../../../context/BasketContext';
+// src/components/menu/order/OrderSummary.jsx
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./OrderSummary.css";
+import { BasketContext } from "../../../context/BasketContext.jsx";
 
 const OrderSummary = () => {
-  const { basket, setBasket } = useContext(BasketContext); // Use context
+  const { basket, setBasket } = useContext(BasketContext);
   const navigate = useNavigate();
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
 
-  // Calculate total price
   const totalPrice = basket
     .reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)
     .toFixed(2);
 
-  // Increase item quantity
   const handleIncrease = (id) => {
-    setBasket(prevBasket =>
-      prevBasket.map(item =>
+    setBasket((prevBasket) =>
+      prevBasket.map((item) =>
         item.id === id ? { ...item, quantity: (item.quantity || 1) + 1 } : item
       )
     );
   };
 
-  // Decrease item quantity (remove if it reaches 0)
   const handleDecrease = (id) => {
-    setBasket(prevBasket => {
-      const item = prevBasket.find(item => item.id === id);
+    setBasket((prevBasket) => {
+      const item = prevBasket.find((item) => item.id === id);
       if (item.quantity > 1) {
-        return prevBasket.map(item =>
+        return prevBasket.map((item) =>
           item.id === id ? { ...item, quantity: item.quantity - 1 } : item
         );
       }
-      return prevBasket.filter(item => item.id !== id);
+      return prevBasket.filter((item) => item.id !== id);
     });
   };
 
-  // Remove item entirely from basket
   const handleRemove = (id) => {
-    setBasket(prevBasket => prevBasket.filter(item => item.id !== id));
+    setBasket((prevBasket) => prevBasket.filter((item) => item.id !== id));
   };
 
-  // Handle purchase
-  const handlePurchase = () => {
-    alert('Purchase completed! Thank you for your order.');
+  const handlePurchaseClick = () => {
+    setShowCheckoutForm(true);
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.phone) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    // Generate a random 10-digit order ID
+    const orderId = Math.floor(1000000000 + Math.random() * 9000000000);
+    // Navigate to thank-you page with order details
+    navigate("/thank-you", {
+      state: {
+        orderId,
+        customer: formData,
+        basket,
+        totalPrice,
+      },
+    });
     setBasket([]); // Clear basket
-    navigate('/'); // Redirect back to DrinksMenu
+    setShowCheckoutForm(false);
+    setFormData({ name: "", email: "", phone: "" });
   };
 
   return (
     <div className="order-summary-container">
       <h2>Your Order Summary</h2>
-      <button
-        className="back-btn"
-        onClick={() => navigate('/')}
-      >
+      <button className="back-btn" onClick={() => navigate("/menu")}>
         Back to Menu
       </button>
       {basket.length === 0 ? (
@@ -83,12 +106,54 @@ const OrderSummary = () => {
           <div className="total-price">
             <strong>Total: ${totalPrice}</strong>
           </div>
-          <button
-            className="purchase-btn"
-            onClick={handlePurchase}
-          >
+          <button className="purchase-btn" onClick={handlePurchaseClick}>
             Proceed to Purchase
           </button>
+
+          {/* Checkout Form (Inline) */}
+          {showCheckoutForm && (
+            <div className="checkout-form">
+              <h3>Enter Your Details</h3>
+              <form onSubmit={handleFormSubmit}>
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleFormChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleFormChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleFormChange}
+                    required
+                  />
+                </div>
+                <button type="submit" className="submit-btn">
+                  Submit Order
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </div>
