@@ -1,6 +1,8 @@
 // src/components/menu/order/Checkout.jsx
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify'; // Import react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
 import './CheckOut.css';
 import { BasketContext } from '../../../context/BasketContext.jsx';
 
@@ -60,24 +62,40 @@ const Checkout = () => {
   };
 
   const handleContinueToPayment = () => {
-    const orderId = Math.floor(1000000000 + Math.random() * 9000000000);
-    navigate('/thank-you', {
-      state: {
-        orderId,
-        trackingNumber: Math.floor(100000000000 + Math.random() * 900000000000), // 12 digits
-        customer: {
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          phone: '',
-        },
-        basket,
-        totalPrice: total,
-      },
+    // Show success toast notification
+    toast.success('Successfully purchased!', {
+      position: 'top-right',
+      autoClose: 2000, // Toast visible for 2 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
     });
+
+    // Delay navigation to allow toast to be seen
+    setTimeout(() => {
+      const orderId = Math.floor(1000000000 + Math.random() * 9000000000);
+      navigate('/thank-you', {
+        state: {
+          orderId,
+          trackingNumber: Math.floor(100000000000 + Math.random() * 900000000000), // 12 digits
+          customer: {
+            name: `${formData.firstName} ${formData.lastName}`,
+            email: formData.email,
+            phone: '',
+          },
+          basket,
+          totalPrice: total,
+        },
+      });
+    }, 2500); // Delay navigation by 2.5 seconds
   };
 
   return (
     <div className="checkout-container">
+      {/* Add ToastContainer to render toasts */}
+      <ToastContainer />
+      
       <div className="checkout-form-side">
         <div className="progress-bar">
           <div className={step >= 1 ? 'step active' : 'step'}>

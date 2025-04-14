@@ -1,4 +1,7 @@
-// src/components/menu/DrinksMenu.jsx
+// First, install react-toastify in your project:
+// npm install react-toastify
+
+// Updated DrinksMenu.jsx with toast notifications
 import React, { useState, useEffect, useContext } from 'react';
 import './DrinksMenu.css';
 import drinksData from './drinksData';
@@ -6,6 +9,9 @@ import { db } from './firebase';
 import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore';
 import Basket from './Basket';
 import { BasketContext } from '../../context/BasketContext.jsx';
+// Import the toast library
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DrinksMenu = () => {
   const { basket, setBasket } = useContext(BasketContext);
@@ -71,8 +77,26 @@ const DrinksMenu = () => {
 
       setReviews(prev => [...prev, reviewData]);
       setNewReview('');
+      
+      // Show toast notification for successful review submission
+      toast.success(`Your review for ${selectedDrink.name} has been submitted!`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      
     } catch (error) {
       console.error('Error adding review:', error);
+      
+      // Show error toast if submission fails
+      toast.error('Failed to submit review. Please try again.', {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      
     } finally {
       setIsSubmitting(false);
     }
@@ -82,10 +106,10 @@ const DrinksMenu = () => {
     setBasket(prevBasket => {
       const existingItem = prevBasket.find(item => item.id === drink.id);
       if (existingItem) {
-        // If the drink is already in the basket, don’t add it again or increase quantity
+        // If the drink is already in the basket, don't add it again or increase quantity
         return prevBasket; // Return unchanged basket
       }
-      // Add the drink with quantity 1 only if it’s not already in the basket
+      // Add the drink with quantity 1 only if it's not already in the basket
       return [...prevBasket, { ...drink, quantity: 1 }];
     });
     setAddedDrinkName(drink.name);
@@ -95,6 +119,9 @@ const DrinksMenu = () => {
 
   return (
     <div className="drinks-menu">
+      {/* Add ToastContainer component to render the notifications */}
+      <ToastContainer />
+      
       <h1>Drinks Menu</h1>
       <div className="menu-layout">
         <aside className="menu-sidebar">
