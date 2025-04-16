@@ -1,10 +1,14 @@
 // src/components/menu/order/Checkout.jsx
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify'; // Import react-toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import toastify styles
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './CheckOut.css';
 import { BasketContext } from '../../../context/BasketContext.jsx';
+import { loadStripe } from '@stripe/stripe-js'; // Import Stripe
+
+// Initialize Stripe with your public key from the .env file
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const Checkout = () => {
   const { basket } = useContext(BasketContext);
@@ -25,7 +29,7 @@ const Checkout = () => {
     .reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)
     .toFixed(2);
   const shippingFee = step >= 2 ? 10 : 0;
-  const discount = 0; // Placeholder for coupon logic
+  const discount = 0;
   const total = (parseFloat(subtotal) + shippingFee - discount).toFixed(2);
 
   const handleFormChange = (e) => {
@@ -61,39 +65,68 @@ const Checkout = () => {
     setStep(1);
   };
 
-  const handleContinueToPayment = () => {
-    // Show success toast notification
-    toast.success('Successfully purchased!', {
-      position: 'top-right',
-      autoClose: 2000, // Toast visible for 2 seconds
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+  const handleContinueToPayment = async () => {
+    try {
+      // Get Stripe instance
+      const stripe = await stripePromise;
 
-    // Delay navigation to allow toast to be seen
-    setTimeout(() => {
-      const orderId = Math.floor(1000000000 + Math.random() * 9000000000);
-      navigate('/thank-you', {
-        state: {
-          orderId,
-          trackingNumber: Math.floor(100000000000 + Math.random() * 900000000000), // 12 digits
-          customer: {
-            name: `${formData.firstName} ${formData.lastName}`,
-            email: formData.email,
-            phone: '',
+      // Prepare line items for Stripe Checkout
+      const lineItems = basket.map(item => ({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.name,
           },
-          basket,
-          totalPrice: total,
+          unit_amount: Math.round(item.price * 100), // Convert to cents
         },
+        quantity: item.quantity || 1,
+      }));
+
+      // Add shipping fee as a separate line item
+      if (shippingFee > 0) {
+        lineItems.push({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Shipping Fee',
+            },
+            unit_amount: Math.round(shippingFee * 100),
+          },
+          quantity: 1,
+        });
+      }
+
+      // Call your backend to create a Checkout Session
+      const response = await fetch('http://localhost:4242/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          lineItems,
+          customerEmail: formData.email,
+        }),
       });
-    }, 2500); // Delay navigation by 2.5 seconds
+
+      const session = await response.json();
+
+      // Redirect to Stripe Checkout
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (error) {
+        console.error('Stripe Checkout error:', error);
+        toast.error('Payment failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Something went wrong. Please try again.');
+    }
   };
 
   return (
     <div className="checkout-container">
-      {/* Add ToastContainer to render toasts */}
       <ToastContainer />
       
       <div className="checkout-form-side">
