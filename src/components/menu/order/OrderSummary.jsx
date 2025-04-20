@@ -1,8 +1,8 @@
 // src/components/menu/order/OrderSummary.jsx
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './OrderSummary.css';
-import { BasketContext } from '../../../context/BasketContext';
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import "./OrderSummary.css";
+import { BasketContext } from "../../../context/BasketContext";
 
 const OrderSummary = () => {
   const { basket, setBasket } = useContext(BasketContext);
@@ -13,31 +13,35 @@ const OrderSummary = () => {
     .toFixed(2);
 
   const handleIncrease = (id) => {
-    setBasket(prevBasket =>
-      prevBasket.map(item =>
+    setBasket((prevBasket) =>
+      prevBasket.map((item) =>
         item.id === id ? { ...item, quantity: (item.quantity || 1) + 1 } : item
       )
     );
   };
 
   const handleDecrease = (id) => {
-    setBasket(prevBasket => {
-      const item = prevBasket.find(item => item.id === id);
+    setBasket((prevBasket) => {
+      const item = prevBasket.find((item) => item.id === id);
       if (item.quantity > 1) {
-        return prevBasket.map(item =>
+        return prevBasket.map((item) =>
           item.id === id ? { ...item, quantity: item.quantity - 1 } : item
         );
       }
-      return prevBasket.filter(item => item.id !== id);
+      return prevBasket.filter((item) => item.id !== id);
     });
   };
 
   const handleRemove = (id) => {
-    setBasket(prevBasket => prevBasket.filter(item => item.id !== id));
+    setBasket((prevBasket) => prevBasket.filter((item) => item.id !== id));
   };
 
   const handleCheckout = () => {
-    navigate('/checkout');
+    navigate("/checkout");
+  };
+
+  const handleDelete = (id) => {
+    setBasket();
   };
 
   return (
@@ -45,16 +49,17 @@ const OrderSummary = () => {
       {basket.length === 0 ? (
         <div className="empty-basket">
           <p>Your basket is empty.</p>
-          <button
-            className="back-btn"
-            onClick={() => navigate('/menu')}
-          >
+          <button className="back-btn" onClick={() => navigate("/menu")}>
             Back to Menu
           </button>
         </div>
       ) : (
         <div className="order-summary-layout">
-          <div className={`order-images ${basket.length === 1 ? 'single-item' : ''}`}>
+          <div
+            className={`order-images ${
+              basket.length === 1 ? "single-item" : ""
+            }`}
+          >
             {basket.map((item) => (
               <img
                 key={item.id}
@@ -69,7 +74,9 @@ const OrderSummary = () => {
             <div className="items-list">
               {basket.map((item) => (
                 <div key={item.id} className="item-row">
-                  <span>{item.name} (x{item.quantity || 1})</span>
+                  <span>
+                    {item.name} (x{item.quantity || 1})
+                  </span>
                   <div className="item-controls">
                     <button onClick={() => handleDecrease(item.id)}>-</button>
                     <span>{item.quantity || 1}</span>
@@ -89,17 +96,14 @@ const OrderSummary = () => {
               </div>
             </div>
             <div className="button-group">
-              <button
-                className="back-btn"
-                onClick={() => navigate('/menu')}
-              >
-                Back to Menu
-              </button>
-              <button
-                className="checkout-btn"
-                onClick={handleCheckout}
-              >
+              <button className="checkout-btn" onClick={handleCheckout}>
                 Checkout
+              </button>
+              <button className="deletedrinks-btn" onClick={handleDelete}>
+                Remove All
+              </button>
+              <button className="back-btn" onClick={() => navigate("/menu")}>
+                Back to Menu
               </button>
             </div>
           </div>
