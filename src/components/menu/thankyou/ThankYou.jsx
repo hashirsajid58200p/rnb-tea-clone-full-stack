@@ -1,22 +1,33 @@
-// src/components/menu/order/ThankYou.jsx
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './ThankYou.css';
+import Confetti from 'react-confetti'; // Import Confetti
 
 const ThankYou = () => {
-  const { state } = useLocation();
   const navigate = useNavigate();
 
+  // Retrieve order details from sessionStorage
+  const orderDetails = JSON.parse(sessionStorage.getItem('orderDetails')) || {};
+  
   const {
     orderId = 'N/A',
     trackingNumber = 'N/A',
     customer = {},
     basket = [],
     totalPrice = '0.00',
-  } = state || {};
+  } = orderDetails;
+
+  // Clear sessionStorage to avoid stale data
+  sessionStorage.removeItem('orderDetails');
 
   return (
     <div className="thank-you-container">
+      <Confetti
+        width={window.innerWidth} // Full width of the window
+        height={window.innerHeight} // Full height of the window
+        recycle={false} // Stop confetti after initial burst
+        numberOfPieces={2500} // Number of confetti pieces
+      />
       <h1>Thank You for Purchasing!</h1>
       <div className="receipt">
         <h2>Your Receipt</h2>

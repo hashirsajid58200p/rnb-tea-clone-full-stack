@@ -12,7 +12,7 @@ import FranchisePage from "./FranchisePage.jsx";
 import ContactPage from "./ContactPage.jsx";
 import OrderPage from "./OrderPage.jsx"; // Updated import
 import CheckOutPage from "./CheckOutPage.jsx"; // Updated import
-import ThankYou from "./components/menu/thankyou/ThanksYou.jsx";
+import ThankYouPage from "./ThankYouPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BasketProvider>
@@ -25,7 +25,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/order" element={<OrderPage />} /> {/* Updated */}
         <Route path="/checkout" element={<CheckOutPage />} /> {/* Updated */}
-        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
       </Routes>
     </BrowserRouter>
   </BasketProvider>

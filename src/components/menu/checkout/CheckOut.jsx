@@ -1,13 +1,11 @@
-// src/components/menu/order/Checkout.jsx
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './CheckOut.css';
 import { BasketContext } from '../../../context/BasketContext.jsx';
-import { loadStripe } from '@stripe/stripe-js'; // Import Stripe
+import { loadStripe } from '@stripe/stripe-js';
 
-// Initialize Stripe with your public key from the .env file
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const Checkout = () => {
@@ -67,22 +65,19 @@ const Checkout = () => {
 
   const handleContinueToPayment = async () => {
     try {
-      // Get Stripe instance
       const stripe = await stripePromise;
 
-      // Prepare line items for Stripe Checkout
       const lineItems = basket.map(item => ({
         price_data: {
           currency: 'usd',
           product_data: {
             name: item.name,
           },
-          unit_amount: Math.round(item.price * 100), // Convert to cents
+          unit_amount: Math.round(item.price * 100),
         },
         quantity: item.quantity || 1,
       }));
 
-      // Add shipping fee as a separate line item
       if (shippingFee > 0) {
         lineItems.push({
           price_data: {
@@ -96,7 +91,22 @@ const Checkout = () => {
         });
       }
 
-      // Call your backend to create a Checkout Session
+      // Store order details in sessionStorage before redirecting to Stripe
+      const orderId = Math.floor(1000000000 + Math.random() * 9000000000);
+      const trackingNumber = Math.floor(100000000000 + Math.random() * 900000000000);
+      const orderDetails = {
+        orderId,
+        trackingNumber,
+        customer: {
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          phone: '',
+        },
+        basket,
+        totalPrice: total,
+      };
+      sessionStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+
       const response = await fetch('http://localhost:4242/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -110,7 +120,6 @@ const Checkout = () => {
 
       const session = await response.json();
 
-      // Redirect to Stripe Checkout
       const { error } = await stripe.redirectToCheckout({
         sessionId: session.id,
       });

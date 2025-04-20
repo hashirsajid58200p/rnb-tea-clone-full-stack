@@ -8,7 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Use the Stripe secret key from the .env file
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.post('/create-checkout-session', async (req, res) => {
@@ -20,8 +19,8 @@ app.post('/create-checkout-session', async (req, res) => {
       line_items: lineItems,
       customer_email: customerEmail,
       mode: 'payment',
-      success_url: 'http://localhost:3000/thank-you',
-      cancel_url: 'http://localhost:3000/checkout',
+      success_url: 'http://localhost:5173/thank-you', // Updated port to 5173
+      cancel_url: 'http://localhost:5173/checkout',   // Updated port to 5173
     });
 
     res.json({ id: session.id });
