@@ -1,4 +1,3 @@
-// src/components/menu/order/OrderSummary.jsx
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OrderSummary.css";
@@ -40,8 +39,8 @@ const OrderSummary = () => {
     navigate("/checkout");
   };
 
-  const handleDelete = (id) => {
-    setBasket();
+  const handleDelete = () => {
+    setBasket([]); // Clear the basket by setting it to an empty array
   };
 
   return (
