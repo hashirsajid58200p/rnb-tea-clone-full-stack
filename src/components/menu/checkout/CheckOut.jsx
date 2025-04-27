@@ -22,6 +22,7 @@ const Checkout = () => {
     postalCode: '',
   });
   const [coupon, setCoupon] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add loading state
 
   const subtotal = basket
     .reduce((sum, item) => sum + item.price * (item.quantity || 1), 0)
@@ -64,6 +65,9 @@ const Checkout = () => {
   };
 
   const handleContinueToPayment = async () => {
+    if (isSubmitting) return; // Prevent multiple submissions
+    setIsSubmitting(true);
+
     try {
       const stripe = await stripePromise;
 
@@ -91,10 +95,18 @@ const Checkout = () => {
         });
       }
 
-      // Store order details in sessionStorage before redirecting to Stripe
+      // Prepare order details for the x-order-details header
       const orderId = Math.floor(1000000000 + Math.random() * 9000000000);
-      const trackingNumber = Math.floor(100000000000 + Math.random() * 900000000000);
       const orderDetails = {
+        orderId,
+        basket,
+        totalPrice: total,
+      };
+      console.log('Order details being sent in x-order-details:', orderDetails);
+
+      // Store order details in sessionStorage before redirecting to Stripe
+      const trackingNumber = Math.floor(100000000000 + Math.random() * 900000000000);
+      const orderDetailsForSession = {
         orderId,
         trackingNumber,
         customer: {
@@ -105,12 +117,13 @@ const Checkout = () => {
         basket,
         totalPrice: total,
       };
-      sessionStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+      sessionStorage.setItem('orderDetails', JSON.stringify(orderDetailsForSession));
 
       const response = await fetch('http://localhost:4242/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-order-details': JSON.stringify(orderDetails),
         },
         body: JSON.stringify({
           lineItems,
@@ -131,6 +144,8 @@ const Checkout = () => {
     } catch (error) {
       console.error('Error:', error);
       toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -269,8 +284,9 @@ const Checkout = () => {
               <button
                 className="continue-btn"
                 onClick={handleContinueToPayment}
+                disabled={isSubmitting}
               >
-                Continue to Purchase
+                {isSubmitting ? 'Processing...' : 'Continue to Purchase'}
               </button>
             </div>
           </div>
@@ -295,9 +311,7 @@ const Checkout = () => {
             value={coupon}
             onChange={handleCouponChange}
           />
-          <button className="apply-coupon-btn" onClick={applyCoupon}>
-            Apply
-          </button>
+          "Apply"
         </div>
         <div className="order-totals">
           <div className="total-row">

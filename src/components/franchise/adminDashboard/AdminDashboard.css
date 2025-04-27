@@ -58,32 +58,98 @@
     background-color: #f1f1f1;
   }
   
-  .add-product {
+  .product-management {
+    margin-bottom: 40px;
+  }
+  
+  .product-management h2 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .product-list {
+    margin-bottom: 30px;
+  }
+  
+  .product-list h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .product-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-list th,
+  .product-list td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-list th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .product-list tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .product-list .edit-btn {
+    background-color: #ffc107;
+    margin-right: 10px;
+  }
+  
+  .product-list .edit-btn:hover {
+    background-color: #e0a800;
+  }
+  
+  .product-list .delete-btn {
+    background-color: #dc3545;
+  }
+  
+  .product-list .delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .add-product,
+  .edit-product {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
-  .add-product h2 {
+  .add-product h3,
+  .edit-product h3 {
     color: #333;
     margin-bottom: 20px;
   }
   
-  .add-product form {
+  .add-product form,
+  .edit-product form {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
   
-  .add-product label {
+  .add-product label,
+  .edit-product label {
     font-weight: bold;
     color: #555;
   }
   
   .add-product input,
   .add-product textarea,
-  .add-product select {
+  .add-product select,
+  .edit-product input,
+  .edit-product textarea,
+  .edit-product select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -92,26 +158,47 @@
     box-sizing: border-box;
   }
   
-  .add-product textarea {
+  .add-product textarea,
+  .edit-product textarea {
     resize: vertical;
     min-height: 100px;
   }
   
-  .add-product button {
+  .add-product button,
+  .edit-product button {
     background-color: #28a745;
     align-self: flex-start;
   }
   
-  .add-product button:hover {
+  .add-product button:hover,
+  .edit-product button:hover {
     background-color: #218838;
   }
   
-  .add-product p[style*="color: red"] {
+  .edit-product .cancel-btn {
+    background-color: #6c757d;
+    margin-left: 10px;
+  }
+  
+  .edit-product .cancel-btn:hover {
+    background-color: #5a6268;
+  }
+  
+  .form-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .add-product p[style*="color: red"],
+  .edit-product p[style*="color: red"],
+  .product-management p[style*="color: red"] {
     margin: 5px 0;
     font-size: 14px;
   }
   
-  .add-product p[style*="color: green"] {
+  .add-product p[style*="color: green"],
+  .edit-product p[style*="color: green"],
+  .product-management p[style*="color: green"] {
     margin: 5px 0;
     font-size: 14px;
   }
