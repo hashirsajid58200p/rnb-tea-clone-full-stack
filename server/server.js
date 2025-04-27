@@ -67,6 +67,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
   let event;
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
+    console.log('Webhook event received:', event.type);
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -76,11 +77,17 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     const session = event.data.object;
     console.log('Webhook: Checkout session completed for ID:', session.id);
     try {
-      await db.collection('transactions').doc(session.id).update({
-        status: 'completed',
-        timestamp: admin.firestore.FieldValue.serverTimestamp(),
-      });
-      console.log('Transaction status updated to completed for ID:', session.id);
+      const transactionRef = db.collection('transactions').doc(session.id);
+      const doc = await transactionRef.get();
+      if (doc.exists) {
+        await transactionRef.update({
+          status: 'completed',
+          timestamp: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        console.log('Transaction status updated to completed for ID:', session.id);
+      } else {
+        console.log('Transaction not found in Firestore for ID:', session.id);
+      }
     } catch (error) {
       console.error('Error updating transaction status to completed:', error);
     }
@@ -88,14 +95,22 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     const session = event.data.object;
     console.log('Webhook: Checkout session expired for ID:', session.id);
     try {
-      await db.collection('transactions').doc(session.id).update({
-        status: 'canceled',
-        timestamp: admin.firestore.FieldValue.serverTimestamp(),
-      });
-      console.log('Transaction status updated to canceled for ID:', session.id);
+      const transactionRef = db.collection('transactions').doc(session.id);
+      const doc = await transactionRef.get();
+      if (doc.exists) {
+        await transactionRef.update({
+          status: 'canceled',
+          timestamp: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        console.log('Transaction status updated to canceled for ID:', session.id);
+      } else {
+        console.log('Transaction not found in Firestore for ID:', session.id);
+      }
     } catch (error) {
       console.error('Error updating transaction status to canceled:', error);
     }
+  } else {
+    console.log('Unhandled webhook event type:', event.type);
   }
 
   res.status(200).json({ received: true });

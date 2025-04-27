@@ -178,7 +178,7 @@ const AdminDashboard = () => {
                   <td>{tx.orderId}</td>
                   <td>{tx.customerEmail}</td>
                   <td>${tx.totalPrice}</td>
-                  <td>{tx.status}</td>
+                  <td>{tx.status === 'completed' ? 'purchased' : tx.status}</td>
                   <td>
                     {tx.timestamp ? new Date(tx.timestamp.toDate()).toLocaleString() : 'N/A'}
                   </td>
