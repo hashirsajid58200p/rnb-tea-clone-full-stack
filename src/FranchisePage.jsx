@@ -8,8 +8,14 @@ const FranchisePage = () => {
   return (
     <>
       <Header />
-      <RegForm />
-      <LoginForm />
+      <div className="franchise-page-container">
+        <section className="franchise-registration">
+          <RegForm />
+        </section>
+        <section className="admin-login">
+          <LoginForm />
+        </section>
+      </div>
       <Footer /> 
     </>
   );

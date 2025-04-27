@@ -1,27 +1,37 @@
 import React, { useState } from 'react';
-import './LoginForm.css'; // We'll define the styles in this CSS file.
+import { useNavigate } from 'react-router-dom';
+import './LoginForm.css';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
+  const [adminId, setAdminId] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Email:', email, 'Password:', password);
+    const ADMIN_ID = 'admin';
+    const ADMIN_PASSWORD = 'password123';
+
+    if (adminId === ADMIN_ID && password === ADMIN_PASSWORD) {
+      navigate('/admin-dashboard');
+    } else {
+      setError('Invalid Admin ID or Password');
+    }
   };
 
   return (
     <div className="login-form">
-      <h2 className="login-header">Login to your Franchise Account</h2>
+      <h2 className="login-header">Admin Login</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <input
-            type="email"
-            placeholder="Email"
+            type="text"
+            placeholder="Admin ID"
             className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={adminId}
+            onChange={(e) => setAdminId(e.target.value)}
             required
           />
         </div>
@@ -37,9 +47,6 @@ const LoginForm = () => {
         </div>
         <button type="submit" className="login-button">Login</button>
       </form>
-      <p className="forgot-password">
-        <a href="/forgot-password">Forgot Password?</a>
-      </p>
     </div>
   );
 };
