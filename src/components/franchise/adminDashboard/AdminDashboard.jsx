@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../menu/firebase';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/storage';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -13,7 +11,6 @@ const AdminDashboard = () => {
     description: '',
     price: '',
     category: '',
-    image: null,
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -40,42 +37,30 @@ const AdminDashboard = () => {
     setNewProduct(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setNewProduct(prev => ({ ...prev, image: file }));
-    }
-  };
-
   const handleAddProduct = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
-    if (!newProduct.name || !newProduct.description || !newProduct.price || !newProduct.category || !newProduct.image) {
-      setError('Please fill in all fields and upload an image.');
+    if (!newProduct.name || !newProduct.description || !newProduct.price || !newProduct.category) {
+      setError('Please fill in all fields.');
       return;
     }
 
     try {
-      const storageRef = firebase.storage().ref();
-      const imageRef = storageRef.child(`products/${newProduct.image.name}`);
-      await imageRef.put(newProduct.image);
-      const imageUrl = await imageRef.getDownloadURL();
-
       const newProductData = {
         id: Date.now().toString(),
         name: newProduct.name,
         description: newProduct.description,
         price: parseFloat(newProduct.price),
         category: newProduct.category,
-        image: imageUrl,
+        image: '', // Placeholder for image; can be updated manually later
       };
 
       await addDoc(collection(db, 'products'), newProductData);
 
       setSuccess('Product added successfully!');
-      setNewProduct({ name: '', description: '', price: '', category: '', image: null });
+      setNewProduct({ name: '', description: '', price: '', category: '' });
     } catch (err) {
       console.error('Error adding product:', err);
       setError('Failed to add product. Please try again.');
@@ -173,15 +158,6 @@ const AdminDashboard = () => {
               <option value="Yakult">Yakult</option>
               <option value="Cheese Cream">Cheese Cream</option>
             </select>
-          </div>
-          <div style={{ marginBottom: '10px' }}>
-            <label>Image:</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ marginTop: '5px' }}
-            />
           </div>
           <button type="submit" style={{ padding: '10px 20px' }}>
             Add Product
