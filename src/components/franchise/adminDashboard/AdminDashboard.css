@@ -1,0 +1,117 @@
+.admin-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .admin-dashboard h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .admin-dashboard button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .admin-dashboard button:hover {
+    background-color: #0056b3;
+  }
+  
+  .transaction-history {
+    margin-bottom: 40px;
+  }
+  
+  .transaction-history h2 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .transaction-history table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transaction-history th,
+  .transaction-history td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .transaction-history th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .transaction-history tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .add-product {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-product h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .add-product form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .add-product label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .add-product input,
+  .add-product textarea,
+  .add-product select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .add-product textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .add-product button {
+    background-color: #28a745;
+    align-self: flex-start;
+  }
+  
+  .add-product button:hover {
+    background-color: #218838;
+  }
+  
+  .add-product p[style*="color: red"] {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  .add-product p[style*="color: green"] {
+    margin: 5px 0;
+    font-size: 14px;
+  }
