@@ -301,3 +301,28 @@
     font-size: 1.5rem;
   }
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Center it vertically */
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.loader::before {
+  content: '';
+  width: 60px;
+  height: 60px;
+  border: 10px solid #ccc;
+  border-top: 10px solid #2a7317;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -7,6 +7,13 @@ import { BasketContext } from '../../context/BasketContext.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Simple Loader Component
+const Loader = () => (
+  <div className="loader">
+    {/* You can add a CSS spinner here if you want! */}
+  </div>
+);
+
 const DrinksMenu = () => {
   const { basket, setBasket } = useContext(BasketContext);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -18,6 +25,7 @@ const DrinksMenu = () => {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [addedDrinkName, setAddedDrinkName] = useState('');
   const [drinks, setDrinks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // New loading state
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -31,6 +39,8 @@ const DrinksMenu = () => {
           position: "top-right",
           autoClose: 3000,
         });
+      } finally {
+        setIsLoading(false); // Stop loading whether success or error
       }
     };
     fetchDrinks();
@@ -127,43 +137,47 @@ const DrinksMenu = () => {
     <div className="drinks-menu">
       <ToastContainer />
       <h1>Drinks Menu</h1>
-      <div className="menu-layout">
-        <aside className="menu-sidebar">
-          <ul>
-            {categories.map((category, index) => (
-              <li
-                key={index}
-                className={category === selectedCategory ? 'active' : ''}
-                onClick={() => setSelectedCategory(category)}
+      {isLoading ? (
+        <Loader /> // Show loader while fetching drinks
+      ) : (
+        <div className="menu-layout">
+          <aside className="menu-sidebar">
+            <ul>
+              {categories.map((category, index) => (
+                <li
+                  key={index}
+                  className={category === selectedCategory ? 'active' : ''}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+          </aside>
+          <main className="menu-content">
+            {filteredDrinks.map(drink => (
+              <div
+                key={drink.id}
+                className="drink-card"
+                onClick={() => openPopup(drink)}
               >
-                {category}
-              </li>
+                <img src={drink.image} alt={drink.name} />
+                <p>{drink.name}</p>
+                <p className="drink-price">${drink.price}</p>
+                <button
+                  className="add-to-basket"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToBasket(drink);
+                  }}
+                >
+                  <i className="fa fa-shopping-cart"></i> Add to Basket
+                </button>
+              </div>
             ))}
-          </ul>
-        </aside>
-        <main className="menu-content">
-          {filteredDrinks.map(drink => (
-            <div
-              key={drink.id}
-              className="drink-card"
-              onClick={() => openPopup(drink)}
-            >
-              <img src={drink.image} alt={drink.name} />
-              <p>{drink.name}</p>
-              <p className="drink-price">${drink.price}</p>
-              <button
-                className="add-to-basket"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  addToBasket(drink);
-                }}
-              >
-                <i className="fa fa-shopping-cart"></i> Add to Basket
-              </button>
-            </div>
-          ))}
-        </main>
-      </div>
+          </main>
+        </div>
+      )}
 
       <Basket />
 
