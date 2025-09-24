@@ -1,0 +1,256 @@
+/* src/components/menu/order/OrderSummary.css */
+.order-summary-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  
+  .empty-basket {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .empty-basket p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .back-btn {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background: #555;
+  }
+  
+  .order-summary-layout {
+    display: flex;
+    min-height: 500px;
+  }
+  
+  .order-images {
+    flex: 1;
+    background-color: #2a7317;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .order-images.single-item {
+    justify-content: center; /* Center single image vertically */
+  }
+  
+  .order-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 5px;
+  }
+  
+  .order-details {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  
+  .order-details h2 {
+    font-size: 2rem;
+    color: #2a7317;
+    margin-bottom: 20px;
+  }
+  
+  .items-list {
+    margin-bottom: 20px;
+  }
+  
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .item-row span:first-child {
+    font-size: 1.1rem;
+    color: #333;
+    flex: 2;
+  }
+  
+  .item-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .item-controls button {
+    background: #2a7317;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .item-controls button:hover {
+    background: #1a5d11;
+  }
+  
+  .item-controls .remove-btn {
+    background: #d9534f;
+    margin-left: 10px;
+  }
+  
+  .item-controls .remove-btn:hover {
+    background: #c9302c;
+  }
+  
+  .item-controls span {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .item-row span:last-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #d9534f;
+    flex: 1;
+    text-align: right;
+  }
+  
+  .total-price {
+    text-align: right;
+    margin: 20px 0;
+    font-size: 1.3rem;
+    color: #2a7317;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .checkout-btn {
+    background: #2a7317;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .checkout-btn:hover {
+    background: #1a5d11;
+  }
+  .deletedrinks-btn {
+    background: #2a7317;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .deletedrinks:hover {
+    background: #1a5d11;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .order-summary-layout {
+      flex-direction: column;
+      min-height: auto;
+    }
+  
+    .order-images {
+      padding: 15px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+  
+    .order-images.single-item {
+      flex-direction: column; /* Still center single item */
+    }
+  
+    .order-image {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .order-details {
+      padding: 15px;
+    }
+  
+    .order-details h2 {
+      font-size: 1.5rem;
+    }
+  
+    .item-row {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  
+    .item-row span:first-child {
+      flex: 1 100%;
+    }
+  
+    .item-row span:last-child {
+      text-align: left;
+    }
+  
+    .button-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .back-btn,
+    .checkout-btn {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .order-image {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .item-controls button {
+      width: 20px;
+      height: 20px;
+      font-size: 0.9rem;
+    }
+  
+    .item-controls span {
+      font-size: 1rem;
+    }
+  
+    .total-price {
+      font-size: 1.2rem;
+    }
+  }

@@ -1,0 +1,214 @@
+/* Header container */
+.header {
+  background-color: white;
+  color: black;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ 
+/* Container */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  padding-left: 20px;
+  max-width: 150px;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 2px solid #2a7317;
+  border-radius: 1rem;
+  padding: 6px;
+  max-width: 250px;
+  width: 100%;
+  margin-right: 10px;
+}
+
+.search-icon {
+  color: #2a7317;
+}
+
+.search-input {
+  font-size: 15px;
+  border: none;
+  outline: none;
+  color: black;
+  margin-left: 6px;
+  margin-right: 10px;
+  width: 100%;
+}
+
+/* Desktop Menu */
+.desktop-menu {
+  display: block;
+}
+
+.menu {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  font-size: 17px;
+  color: #2a7317;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex; /* Ensure the button is fully clickable */
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  background-color: transparent;
+  text-decoration: none; /* Remove underline */
+}
+
+.menu-item:hover {
+  background-color: #e6f7e3;
+}
+
+.selected {
+  background-color: #2a7317;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 9999px;
+}
+
+.selected a {
+  color: white; /* Ensure selected link color is white */
+}
+
+/* Remove underline and color change on click */
+.menu-item a {
+  text-decoration: none;
+  color: inherit; /* Inherit the text color from the parent */
+}
+
+.menu-item a:hover {
+  text-decoration: none; /* Ensure no underline on hover */
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Sidebar (Initially Hidden) */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Start the sidebar off-screen */
+  width: 250px;
+  height: 100vh;
+  background-color: #2a7317;
+  padding-top: 60px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease-in-out; /* Smooth sliding transition */
+}
+
+/* Close Button in Sidebar */
+.close-sidebar {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 20px;
+  background: none;  /* Remove any background */
+  border: none;  /* Remove any border */
+  padding: 0; /* Remove padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu-item {
+  font-size: 18px;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sidebar-menu-item:hover {
+  background-color: #235d14;
+  border-radius: 8px;
+}
+
+/* Show the sidebar by moving it from right to left */
+.sidebar.show {
+  right: 0; /* Sidebar comes into view */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-bar {
+    max-width: 180px;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+    margin-left: auto;
+  }
+
+  /* Ensure menu items are styled correctly on small screens */
+  .menu-item {
+    color: #2a7317; /* Set correct color */
+    text-decoration: none; /* Remove underline */
+  }
+
+  /* Fix issue with link colors turning purple on small screens */
+  .menu-item a {
+    color: #2a7317;
+    text-decoration: none; /* Remove underline */
+  }
+
+  .menu-item a:visited {
+    color: #2a7317; /* Set correct color for visited links */
+  }
+
+  .menu-item:hover {
+    background-color: #e6f7e3;
+  }
+
+  /* Ensure no purple color or underline for selected items on mobile */
+  .menu-item.selected {
+    background-color: #2a7317;
+    color: white;
+    padding: 8px 16px;
+  }
+
+  /* Fix for sidebar items - remove purple text and underline */
+  .sidebar-menu-item a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Ensure white color */
+  }
+
+  .sidebar-menu-item a:hover {
+    color: #e6f7e3; /* Change hover color */
+  }
+}

@@ -1,0 +1,146 @@
+/* Footer wrapper */
+.footer {
+  background-color: #2a7317; /* Updated footer color */
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  color: white; /* Set text color to white for better contrast */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center everything horizontally */
+}
+
+/* Top part of the footer */
+.footer-top {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centers the content vertically */
+  width: 100%;
+  max-width: 1000px; /* Limit width to a max for a cleaner look */
+  border-bottom: 1px solid white; /* Divider line between sections */
+  padding-bottom: 10px; /* Reduced padding between sections */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+/* Footer Contact */
+.footer-contact {
+  margin-right: 80px; /* Increased space between sections */
+  margin-bottom: 20px; /* Added margin for mobile screens */
+}
+
+.footer-email {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align links to the left */
+}
+
+.footer-link {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  margin: 5px 0;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* Divider line */
+.divider {
+  width: 1px;
+  background-color: white;
+  height: 100%;
+  margin: 0 20px;
+}
+
+/* Second section: Social media and Newsletter */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align content to the left of the section */
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.footer-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.footer-icon {
+  font-size: 2rem;
+  color: white;
+  transition: color 0.3s;
+}
+
+.footer-icon:hover {
+  color: #f4f4f4; /* Slightly lighter color on hover */
+}
+
+.footer-newsletter-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #f4f4f4;
+  color: #2a7317;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.footer-newsletter-btn:hover {
+  background-color: #ddd;
+}
+
+/* Bottom part: Copyright */
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .footer-top {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .footer-contact {
+      margin-right: 0;
+      margin-bottom: 20px;
+      text-align: center;
+  }
+
+  .footer-links {
+      align-items: center;
+  }
+
+  .footer-social {
+      text-align: center;
+      align-items: center;
+  }
+
+  .footer-icons {
+      justify-content: center;
+      gap: 15px;
+  }
+
+  .footer-newsletter-btn {
+      width: 100%;
+      text-align: center;
+  }
+}

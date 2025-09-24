@@ -1,0 +1,59 @@
+/* src/menu/Basket.css */
+.basket-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.basket-btn {
+  background-color: #2a7317;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.basket-btn:hover {
+  background-color: #1a5d11;
+}
+
+.basket-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #d9534f;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* Removed popup-related styles since they’re no longer needed */
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .basket-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .basket-count {
+    width: 18px;
+    height: 18px;
+    font-size: 0.8rem;
+  }
+}
