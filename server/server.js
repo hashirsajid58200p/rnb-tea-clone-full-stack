@@ -9,11 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const supabaseUrl =
-  process.env.SUPABASE_URL || "https://fruqkfhrcdzymomvokhh.supabase.co";
-const supabaseKey =
-  process.env.SUPABASE_SERVICE_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZydXFrZmhyY2R6eW1vbXZva2hoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODYyNTcxNywiZXhwIjoyMDc0MjAxNzE3fQ.VZ8kN5f2Q1hY6bC9jK3mL4nP0qR7sT8uI9oJ0kLmM2c";
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
