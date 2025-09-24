@@ -6,10 +6,16 @@ const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+console.log("Supabase URL:", supabaseUrl);
+console.log("Supabase Key:", supabaseKey);
+console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY);
+
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== "POST")
+    return res.status(405).json({ error: "Method not allowed" });
 
   try {
+    console.log("Request body:", req.body);
     const { lineItems, customerEmail } = req.body;
 
     const session = await stripe.checkout.sessions.create({
@@ -22,6 +28,7 @@ export default async function handler(req, res) {
     });
 
     const orderDetailsRaw = req.headers["x-order-details"] || "{}";
+    console.log("Order Details Header:", orderDetailsRaw);
     const orderDetails = JSON.parse(orderDetailsRaw);
     const totalPrice = orderDetails.totalPrice
       ? parseFloat(orderDetails.totalPrice).toFixed(2)
@@ -36,11 +43,15 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString(),
     };
 
-    const { data, error } = await supabase.from("transactions").insert([transactionData]);
+    console.log("Transaction Data:", transactionData);
+    const { data, error } = await supabase
+      .from("transactions")
+      .insert([transactionData]);
     if (error) throw error;
 
     res.status(200).json({ id: session.id });
   } catch (error) {
+    console.error("Error:", error.message);
     res.status(500).json({ error: error.message });
   }
 }
