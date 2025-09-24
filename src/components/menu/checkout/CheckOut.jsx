@@ -121,20 +121,17 @@ const Checkout = () => {
         JSON.stringify(orderDetailsForSession)
       );
 
-      const response = await fetch(
-        "http://localhost:4242/create-checkout-session",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-order-details": JSON.stringify(orderDetails),
-          },
-          body: JSON.stringify({
-            lineItems,
-            customerEmail: formData.email,
-          }),
-        }
-      );
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-order-details": JSON.stringify(orderDetails),
+        },
+        body: JSON.stringify({
+          lineItems,
+          customerEmail: formData.email,
+        }),
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
