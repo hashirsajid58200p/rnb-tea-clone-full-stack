@@ -4,11 +4,10 @@ import "./ThankYou.css";
 import Confetti from "react-confetti"; // Import Confetti
 import { createClient } from "@supabase/supabase-js";
 
-// Initialize Supabase client with environment variables
-const supabase = createClient(
-  process.env.REACT_APP_SUPABASE_URL || "",
-  process.env.REACT_APP_SUPABASE_KEY || ""
-);
+// Initialize Supabase client with environment variables and validation
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
+const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const ThankYou = () => {
   const navigate = useNavigate();
@@ -21,18 +20,19 @@ const ThankYou = () => {
     totalPrice: "0.00",
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Log environment variables for debugging
-    console.log("Supabase URL:", process.env.REACT_APP_SUPABASE_URL);
-    console.log("Supabase Key:", process.env.REACT_APP_SUPABASE_KEY);
+    console.log("Supabase URL:", supabaseUrl);
+    console.log("Supabase Key:", supabaseKey);
 
     // Get orderId from query params
     const searchParams = new URLSearchParams(location.search);
     const orderIdFromUrl = searchParams.get("orderId");
     console.log("OrderId from URL:", orderIdFromUrl);
 
-    // Fetch order details from Supabase if orderId is present
+    // Fetch order details from Supabase if orderId and supabase are present
     const fetchOrderDetails = async () => {
       if (orderIdFromUrl && supabase) {
         try {
@@ -51,13 +51,18 @@ const ThankYou = () => {
               totalPrice: data.totalPrice || "0.00",
             });
           } else if (error) {
+            setError(`Supabase Error: ${error.message}`);
             console.error("Supabase Error:", error.message);
           }
         } catch (err) {
+          setError(`Fetch Error: ${err.message}`);
           console.error("Fetch Error:", err.message);
         } finally {
           setLoading(false);
         }
+      } else if (!supabase) {
+        setError("Supabase not initialized. Check environment variables.");
+        setLoading(false);
       } else {
         setLoading(false);
       }
@@ -76,6 +81,10 @@ const ThankYou = () => {
 
   if (loading) {
     return <div>Loading...</div>; // Simple loading state to avoid white screen
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>; // Display error message if something goes wrong
   }
 
   return (
