@@ -1,12 +1,12 @@
 ## 🏢 R&B Tea Clone - Full-Stack E-Commerce Website
 
-A dynamic **full-stack e-commerce website** built with modern web technologies. This project, known as the **RNBT Tea Clone**, offers a seamless online shopping experience for tea products, featuring a responsive design, payment integration with Stripe, and a backend powered by Supabase.
+A dynamic **full-stack e-commerce website** built with modern web technologies. This project, known as the **R&B Tea Clone**, offers a seamless online shopping experience for tea products, featuring a responsive design, payment integration with Stripe, and a backend powered by Supabase.
 
 ## 🌐 Live Demo
-🔗 [View RNBT Tea Clone](https://rnb-tea-clone-full-stack.vercel.app/)
+🔗 [View R&B Tea Clone](https://rnb-tea-clone-full-stack.vercel.app/)
 
 ## 👀 Preview
-![RNBT Tea Clone Preview](preview.png)
+![R&B Tea Clone Preview](preview.png)
 
 ## 🛠️ Technologies Used
 - React
