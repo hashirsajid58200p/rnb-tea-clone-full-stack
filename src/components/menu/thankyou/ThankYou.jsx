@@ -39,9 +39,13 @@ const ThankYou = () => {
           if (data) {
             setOrderDetails({
               orderId: data.orderId,
-              trackingNumber: data.trackingNumber || "N/A", // Use table value or fallback
+              trackingNumber: data.trackingNumber || "N/A", // Use numeric tracking number from table
               customer: {
-                name: data.customerName || (data.customerEmail ? data.customerEmail.split('@')[0] : "N/A"), // Use customerName or derive from email
+                name:
+                  data.customerName ||
+                  (data.customerEmail
+                    ? data.customerEmail.split("@")[0]
+                    : "N/A"), // Fallback if Stripe name not set
                 email: data.customerEmail || "N/A",
                 phone: data.customerPhone || "", // Placeholder for phone if added later
               },

@@ -35,17 +35,24 @@ export default async function handler(req, res) {
       cancel_url: cancelUrl,
     });
 
+    // Fetch customer details from Stripe (name is optional during checkout)
+    const customer = await stripe.customers.create({
+      email: customerEmail,
+      name: orderDetails.customerName || customerEmail.split('@')[0], // Use provided name or fallback to email prefix
+    });
+    const customerName = customer.name;
+
     const totalPrice = orderDetails.totalPrice
       ? parseFloat(orderDetails.totalPrice).toFixed(2)
       : "0.00";
 
     const transactionData = {
       orderId: orderId,
-      customerName: customerEmail.split('@')[0], // Derive name from email (e.g., "johndoe" from "johndoe@example.com")
+      customerName: customerName, // Use Stripe customer name
       customerEmail: customerEmail,
       basket: orderDetails.basket || [],
       totalPrice: totalPrice,
-      trackingNumber: `TRACK-${Math.floor(100000 + Math.random() * 900000)}`, // Generate text-based tracking number
+      trackingNumber: Math.floor(100000 + Math.random() * 900000), // Numeric tracking number (e.g., 123456)
       status: "pending",
       timestamp: new Date().toISOString(),
     };
