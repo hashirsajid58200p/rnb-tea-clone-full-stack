@@ -44,8 +44,11 @@ const ThankYou = () => {
                 name:
                   data.customerName ||
                   (data.customerEmail
-                    ? data.customerEmail.split("@")[0]
-                    : "N/A"), // Fallback if Stripe name not set
+                    ? data.customerEmail
+                        .split("@")[0]
+                        .replace(/\b\w/g, (c) => c.toUpperCase())
+                        .replace(/[^a-zA-Z\s]/g, " ")
+                    : "N/A"), // Fallback to capitalized email prefix
                 email: data.customerEmail || "N/A",
                 phone: data.customerPhone || "", // Placeholder for phone if added later
               },

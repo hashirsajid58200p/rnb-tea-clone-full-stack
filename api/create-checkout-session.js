@@ -36,9 +36,10 @@ export default async function handler(req, res) {
     });
 
     // Fetch customer details from Stripe (name is optional during checkout)
+    const customerNameFromOrder = orderDetails.customerName || customerEmail.split('@')[0].replace(/\b\w/g, (c) => c.toUpperCase()).replace(/[^a-zA-Z\s]/g, ' ');
     const customer = await stripe.customers.create({
       email: customerEmail,
-      name: orderDetails.customerName || customerEmail.split('@')[0], // Use provided name or fallback to email prefix
+      name: customerNameFromOrder, // Use provided name or capitalized email prefix
     });
     const customerName = customer.name;
 
@@ -52,7 +53,7 @@ export default async function handler(req, res) {
       customerEmail: customerEmail,
       basket: orderDetails.basket || [],
       totalPrice: totalPrice,
-      trackingNumber: Math.floor(100000 + Math.random() * 900000), // Numeric tracking number (e.g., 123456)
+      trackingNumber: Math.floor(100000000000 + Math.random() * 900000000000), // Larger numeric tracking number (e.g., 322864404011)
       status: "pending",
       timestamp: new Date().toISOString(),
     };
