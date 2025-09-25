@@ -1,26 +1,81 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./ThankYou.css";
 import Confetti from "react-confetti"; // Import Confetti
+import { createClient } from "@supabase/supabase-js";
+
+// Initialize Supabase client with environment variables
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL || "",
+  process.env.REACT_APP_SUPABASE_KEY || ""
+);
 
 const ThankYou = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [orderDetails, setOrderDetails] = useState({
+    orderId: "N/A",
+    trackingNumber: "N/A",
+    customer: { name: "N/A", email: "N/A", phone: "" },
+    basket: [],
+    totalPrice: "0.00",
+  });
+  const [loading, setLoading] = useState(true);
 
-  // Retrieve order details from sessionStorage
-  const orderDetailsRaw = sessionStorage.getItem("orderDetails");
-  console.log("Retrieved from sessionStorage:", orderDetailsRaw); // Debug log
-  const orderDetails = orderDetailsRaw ? JSON.parse(orderDetailsRaw) : {};
+  useEffect(() => {
+    // Log environment variables for debugging
+    console.log("Supabase URL:", process.env.REACT_APP_SUPABASE_URL);
+    console.log("Supabase Key:", process.env.REACT_APP_SUPABASE_KEY);
 
-  const {
-    orderId = "N/A",
-    trackingNumber = "N/A",
-    customer = {},
-    basket = [],
-    totalPrice = "0.00",
-  } = orderDetails;
+    // Get orderId from query params
+    const searchParams = new URLSearchParams(location.search);
+    const orderIdFromUrl = searchParams.get("orderId");
+    console.log("OrderId from URL:", orderIdFromUrl);
 
-  // Clear sessionStorage to avoid stale data
-  sessionStorage.removeItem("orderDetails");
+    // Fetch order details from Supabase if orderId is present
+    const fetchOrderDetails = async () => {
+      if (orderIdFromUrl && supabase) {
+        try {
+          const { data, error } = await supabase
+            .from("transactions")
+            .select("*")
+            .eq("orderId", orderIdFromUrl)
+            .single();
+          console.log("Fetched Order Details:", data, "Error:", error);
+          if (data) {
+            setOrderDetails({
+              orderId: data.orderId,
+              trackingNumber: "N/A", // Add logic to generate or fetch if needed
+              customer: {
+                name: data.customerEmail || "N/A",
+                email: data.customerEmail || "N/A",
+                phone: "",
+              }, // Adjusted to use customerEmail
+              basket: data.basket || [],
+              totalPrice: data.totalPrice || "0.00",
+            });
+          } else if (error) {
+            console.error("Supabase Error:", error.message);
+          }
+        } catch (err) {
+          console.error("Fetch Error:", err.message);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+
+    fetchOrderDetails();
+  }, [location.search]);
+
+  const { orderId, trackingNumber, customer, basket, totalPrice } =
+    orderDetails;
+
+  if (loading) {
+    return <div>Loading...</div>; // Simple loading state to avoid white screen
+  }
 
   return (
     <div className="thank-you-container">
@@ -40,10 +95,10 @@ const ThankYou = () => {
           <strong>Tracking Number:</strong> {trackingNumber}
         </p>
         <p>
-          <strong>Name:</strong> {customer.name || "N/A"}
+          <strong>Name:</strong> {customer.name}
         </p>
         <p>
-          <strong>Email:</strong> {customer.email || "N/A"}
+          <strong>Email:</strong> {customer.email}
         </p>
         <h3>Order Details</h3>
         <ul>
