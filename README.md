@@ -1,4 +1,4 @@
-## 🏢 R&B Tea Clone - Full-Stack E-Commerce Website
+## 🏢 R&B Tea Clone - Full-Stack Website
 
 A dynamic **full-stack e-commerce website** built with modern web technologies. This project, known as the **R&B Tea Clone**, offers a seamless online shopping experience for tea products, featuring a responsive design, payment integration with Stripe, and a backend powered by Supabase.
 
