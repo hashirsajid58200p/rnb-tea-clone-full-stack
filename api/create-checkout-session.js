@@ -30,13 +30,7 @@ export default async function handler(req, res) {
     const baseUrl = `https://${
       process.env.VERCEL_URL || "rnb-tea-clone-full-stack.vercel.app"
     }`;
-    const orderDetailsRaw = req.headers["x-order-details"] || "{}";
-    console.log("Order Details Header:", orderDetailsRaw);
-    const orderDetails = JSON.parse(orderDetailsRaw);
-    const orderId =
-      orderDetails.orderId ||
-      Math.floor(1000000000 + Math.random() * 9000000000);
-    const successUrl = `${baseUrl}/thank-you?orderId=${orderId}`;
+    const successUrl = `${baseUrl}/thank-you`;
     const cancelUrl = `${baseUrl}/checkout`;
 
     console.log("Using URLs:", { successUrl, cancelUrl });
@@ -52,12 +46,15 @@ export default async function handler(req, res) {
 
     console.log("Stripe session created:", session.id);
 
+    const orderDetailsRaw = req.headers["x-order-details"] || "{}";
+    console.log("Order Details Header:", orderDetailsRaw);
+    const orderDetails = JSON.parse(orderDetailsRaw);
     const totalPrice = orderDetails.totalPrice
       ? parseFloat(orderDetails.totalPrice).toFixed(2)
       : "0.00";
 
     const transactionData = {
-      orderId: orderId,
+      orderId: orderDetails.orderId || "N/A",
       customerEmail: customerEmail,
       basket: orderDetails.basket || [],
       totalPrice: totalPrice,
