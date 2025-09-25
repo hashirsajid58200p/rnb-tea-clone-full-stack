@@ -6,8 +6,9 @@ import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client with Vite environment variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY; // Changed from VITE_SUPABASE_KEY
-const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase =
+  supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const ThankYou = () => {
   const navigate = useNavigate();
@@ -23,18 +24,11 @@ const ThankYou = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Log Vite environment variables for debugging
-    console.log("Full import.meta.env:", { ...import.meta.env }); // Spread to show all properties
-    console.log("Supabase URL:", supabaseUrl);
-    console.log("Supabase Key:", supabaseKey);
-
-    // Get orderId from query params
-    const searchParams = new URLSearchParams(location.search);
-    const orderIdFromUrl = searchParams.get("orderId");
-    console.log("OrderId from URL:", orderIdFromUrl);
-
     // Fetch order details from Supabase if orderId and supabase are present
     const fetchOrderDetails = async () => {
+      const searchParams = new URLSearchParams(location.search);
+      const orderIdFromUrl = searchParams.get("orderId");
+
       if (orderIdFromUrl && supabase) {
         try {
           const { data, error } = await supabase
@@ -42,27 +36,30 @@ const ThankYou = () => {
             .select("*")
             .eq("orderId", orderIdFromUrl)
             .single();
-          console.log("Fetched Order Details:", data, "Error:", error);
           if (data) {
             setOrderDetails({
               orderId: data.orderId,
-              trackingNumber: "N/A", // Add logic to generate or fetch if needed
-              customer: { name: data.customerEmail || "N/A", email: data.customerEmail || "N/A", phone: "" },
+              trackingNumber: "N/A",
+              customer: {
+                name: data.customerEmail || "N/A",
+                email: data.customerEmail || "N/A",
+                phone: "",
+              },
               basket: data.basket || [],
               totalPrice: data.totalPrice || "0.00",
             });
           } else if (error) {
             setError(`Supabase Error: ${error.message}`);
-            console.error("Supabase Error:", error.message);
           }
         } catch (err) {
           setError(`Fetch Error: ${err.message}`);
-          console.error("Fetch Error:", err.message);
         } finally {
           setLoading(false);
         }
       } else if (!supabase) {
-        setError("Supabase not initialized. Ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in your Vercel dashboard.");
+        setError(
+          "Supabase not initialized. Ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in your Vercel dashboard."
+        );
         setLoading(false);
       } else {
         setLoading(false);
@@ -72,16 +69,11 @@ const ThankYou = () => {
     fetchOrderDetails();
   }, [location.search]);
 
-  const {
-    orderId,
-    trackingNumber,
-    customer,
-    basket,
-    totalPrice,
-  } = orderDetails;
+  const { orderId, trackingNumber, customer, basket, totalPrice } =
+    orderDetails;
 
   if (loading) {
-    return <div>Loading...</div>; // Simple loading state to avoid white screen
+    return <div>Loading...</div>;
   }
 
   if (error) {
@@ -93,24 +85,32 @@ const ThankYou = () => {
           Back to Menu
         </button>
       </div>
-    ); // Display error message with navigation
+    );
   }
 
   return (
     <div className="thank-you-container">
       <Confetti
-        width={window.innerWidth} // Full width of the window
-        height={window.innerHeight} // Full height of the window
-        recycle={false} // Stop confetti after initial burst
-        numberOfPieces={2500} // Number of confetti pieces
+        width={window.innerWidth}
+        height={window.innerHeight}
+        recycle={false}
+        numberOfPieces={2500}
       />
       <h1>Thank You for Purchasing!</h1>
       <div className="receipt">
         <h2>Your Receipt</h2>
-        <p><strong>Order ID:</strong> {orderId}</p>
-        <p><strong>Tracking Number:</strong> {trackingNumber}</p>
-        <p><strong>Name:</strong> {customer.name}</p>
-        <p><strong>Email:</strong> {customer.email}</p>
+        <p>
+          <strong>Order ID:</strong> {orderId}
+        </p>
+        <p>
+          <strong>Tracking Number:</strong> {trackingNumber}
+        </p>
+        <p>
+          <strong>Name:</strong> {customer.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {customer.email}
+        </p>
         <h3>Order Details</h3>
         <ul>
           {basket.length > 0 ? (
@@ -124,12 +124,11 @@ const ThankYou = () => {
             <li>No items in order.</li>
           )}
         </ul>
-        <p className="total"><strong>Total:</strong> ${totalPrice}</p>
+        <p className="total">
+          <strong>Total:</strong> ${totalPrice}
+        </p>
       </div>
-      <button
-        className="back-to-menu-btn"
-        onClick={() => navigate("/menu")}
-      >
+      <button className="back-to-menu-btn" onClick={() => navigate("/menu")}>
         Back to Menu
       </button>
     </div>
