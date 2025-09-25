@@ -39,11 +39,11 @@ const ThankYou = () => {
           if (data) {
             setOrderDetails({
               orderId: data.orderId,
-              trackingNumber: "N/A",
+              trackingNumber: data.trackingNumber || "N/A", // Use table value or fallback
               customer: {
-                name: data.customerEmail || "N/A",
+                name: data.customerName || (data.customerEmail ? data.customerEmail.split('@')[0] : "N/A"), // Use customerName or derive from email
                 email: data.customerEmail || "N/A",
-                phone: "",
+                phone: data.customerPhone || "", // Placeholder for phone if added later
               },
               basket: data.basket || [],
               totalPrice: data.totalPrice || "0.00",

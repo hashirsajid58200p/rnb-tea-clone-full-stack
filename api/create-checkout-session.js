@@ -41,9 +41,11 @@ export default async function handler(req, res) {
 
     const transactionData = {
       orderId: orderId,
+      customerName: customerEmail.split('@')[0], // Derive name from email (e.g., "johndoe" from "johndoe@example.com")
       customerEmail: customerEmail,
       basket: orderDetails.basket || [],
       totalPrice: totalPrice,
+      trackingNumber: `TRACK-${Math.floor(100000 + Math.random() * 900000)}`, // Generate text-based tracking number
       status: "pending",
       timestamp: new Date().toISOString(),
     };
