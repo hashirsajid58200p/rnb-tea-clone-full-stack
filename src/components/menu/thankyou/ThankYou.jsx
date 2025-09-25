@@ -4,9 +4,9 @@ import "./ThankYou.css";
 import Confetti from "react-confetti"; // Import Confetti
 import { createClient } from "@supabase/supabase-js";
 
-// Initialize Supabase client with environment variables and validation
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
+// Initialize Supabase client with Vite environment variables
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const ThankYou = () => {
@@ -23,8 +23,8 @@ const ThankYou = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Log environment variables and process.env for debugging
-    console.log("Process.env:", process.env);
+    // Log Vite environment variables for debugging
+    console.log("Full import.meta.env:", import.meta.env);
     console.log("Supabase URL:", supabaseUrl);
     console.log("Supabase Key:", supabaseKey);
 
@@ -62,7 +62,7 @@ const ThankYou = () => {
           setLoading(false);
         }
       } else if (!supabase) {
-        setError("Supabase not initialized. Check environment variables.");
+        setError("Supabase not initialized. Ensure VITE_SUPABASE_URL and VITE_SUPABASE_KEY are set in your Vercel dashboard.");
         setLoading(false);
       } else {
         setLoading(false);
