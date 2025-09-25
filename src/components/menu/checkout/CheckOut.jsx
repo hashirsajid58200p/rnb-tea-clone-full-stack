@@ -146,15 +146,8 @@ const Checkout = () => {
         throw new Error("Invalid session ID received from server");
       }
 
-      // Append orderId to success_url as a query param
-      const baseUrl = `https://${
-        process.env.VERCEL_URL || "rnb-tea-clone-full-stack.vercel.app"
-      }`;
-      const successUrl = `${baseUrl}/thank-you?orderId=${orderId}`;
       const { error } = await stripe.redirectToCheckout({
         sessionId: session.id,
-        successUrl: successUrl, // Override success_url with query param
-        cancelUrl: `${baseUrl}/checkout`,
       });
 
       if (error) {

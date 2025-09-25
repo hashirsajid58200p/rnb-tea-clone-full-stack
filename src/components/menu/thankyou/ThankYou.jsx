@@ -1,33 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./ThankYou.css";
 import Confetti from "react-confetti"; // Import Confetti
 
 const ThankYou = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [orderDetails, setOrderDetails] = useState({});
 
-  useEffect(() => {
-    // Get orderId from query params
-    const searchParams = new URLSearchParams(location.search);
-    const orderIdFromUrl = searchParams.get("orderId");
-    console.log("OrderId from URL:", orderIdFromUrl);
-
-    // Try to retrieve from sessionStorage
-    const orderDetailsRaw = sessionStorage.getItem("orderDetails");
-    console.log("Retrieved from sessionStorage:", orderDetailsRaw);
-
-    const details = orderDetailsRaw ? JSON.parse(orderDetailsRaw) : {};
-    if (orderIdFromUrl && details.orderId === orderIdFromUrl) {
-      setOrderDetails(details);
-    } else if (orderDetailsRaw) {
-      setOrderDetails(JSON.parse(orderDetailsRaw));
-    }
-
-    // Clear sessionStorage after reading
-    sessionStorage.removeItem("orderDetails");
-  }, [location.search]);
+  // Retrieve order details from sessionStorage
+  const orderDetailsRaw = sessionStorage.getItem("orderDetails");
+  console.log("Retrieved from sessionStorage:", orderDetailsRaw); // Debug log
+  const orderDetails = orderDetailsRaw ? JSON.parse(orderDetailsRaw) : {};
 
   const {
     orderId = "N/A",
@@ -36,6 +18,9 @@ const ThankYou = () => {
     basket = [],
     totalPrice = "0.00",
   } = orderDetails;
+
+  // Clear sessionStorage to avoid stale data
+  sessionStorage.removeItem("orderDetails");
 
   return (
     <div className="thank-you-container">
