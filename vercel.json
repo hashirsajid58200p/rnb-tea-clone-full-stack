@@ -2,6 +2,9 @@
   "rewrites": [
     { "source": "/thank-you", "destination": "/index.html" },
     { "source": "/checkout", "destination": "/index.html" },
-    { "source": "/order", "destination": "/index.html" }
+    { "source": "/order", "destination": "/index.html" },
+    { "source": "/admin-dashboard", "destination": "/index.html" },
+    { "source": "/franchise", "destination": "/index.html" },
+    { "source": "/menu", "destination": "/index.html" }
   ]
 }
