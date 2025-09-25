@@ -6,7 +6,7 @@ import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client with Vite environment variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY; // Changed from VITE_SUPABASE_KEY
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const ThankYou = () => {
@@ -24,7 +24,7 @@ const ThankYou = () => {
 
   useEffect(() => {
     // Log Vite environment variables for debugging
-    console.log("Full import.meta.env:", import.meta.env);
+    console.log("Full import.meta.env:", { ...import.meta.env }); // Spread to show all properties
     console.log("Supabase URL:", supabaseUrl);
     console.log("Supabase Key:", supabaseKey);
 
@@ -62,7 +62,7 @@ const ThankYou = () => {
           setLoading(false);
         }
       } else if (!supabase) {
-        setError("Supabase not initialized. Ensure VITE_SUPABASE_URL and VITE_SUPABASE_KEY are set in your Vercel dashboard.");
+        setError("Supabase not initialized. Ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in your Vercel dashboard.");
         setLoading(false);
       } else {
         setLoading(false);
