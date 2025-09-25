@@ -46,11 +46,7 @@ const ThankYou = () => {
             setOrderDetails({
               orderId: data.orderId,
               trackingNumber: "N/A", // Add logic to generate or fetch if needed
-              customer: {
-                name: data.customerEmail || "N/A",
-                email: data.customerEmail || "N/A",
-                phone: "",
-              }, // Adjusted to use customerEmail
+              customer: { name: data.customerEmail || "N/A", email: data.customerEmail || "N/A", phone: "" },
               basket: data.basket || [],
               totalPrice: data.totalPrice || "0.00",
             });
@@ -70,8 +66,13 @@ const ThankYou = () => {
     fetchOrderDetails();
   }, [location.search]);
 
-  const { orderId, trackingNumber, customer, basket, totalPrice } =
-    orderDetails;
+  const {
+    orderId,
+    trackingNumber,
+    customer,
+    basket,
+    totalPrice,
+  } = orderDetails;
 
   if (loading) {
     return <div>Loading...</div>; // Simple loading state to avoid white screen
@@ -88,18 +89,10 @@ const ThankYou = () => {
       <h1>Thank You for Purchasing!</h1>
       <div className="receipt">
         <h2>Your Receipt</h2>
-        <p>
-          <strong>Order ID:</strong> {orderId}
-        </p>
-        <p>
-          <strong>Tracking Number:</strong> {trackingNumber}
-        </p>
-        <p>
-          <strong>Name:</strong> {customer.name}
-        </p>
-        <p>
-          <strong>Email:</strong> {customer.email}
-        </p>
+        <p><strong>Order ID:</strong> {orderId}</p>
+        <p><strong>Tracking Number:</strong> {trackingNumber}</p>
+        <p><strong>Name:</strong> {customer.name}</p>
+        <p><strong>Email:</strong> {customer.email}</p>
         <h3>Order Details</h3>
         <ul>
           {basket.length > 0 ? (
@@ -113,11 +106,12 @@ const ThankYou = () => {
             <li>No items in order.</li>
           )}
         </ul>
-        <p className="total">
-          <strong>Total:</strong> ${totalPrice}
-        </p>
+        <p className="total"><strong>Total:</strong> ${totalPrice}</p>
       </div>
-      <button className="back-to-menu-btn" onClick={() => navigate("/menu")}>
+      <button
+        className="back-to-menu-btn"
+        onClick={() => navigate("/menu")}
+      >
         Back to Menu
       </button>
     </div>

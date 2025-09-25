@@ -27,15 +27,11 @@ export default async function handler(req, res) {
         .json({ error: "Missing lineItems or customerEmail" });
     }
 
-    const baseUrl = `https://${
-      process.env.VERCEL_URL || "rnb-tea-clone-full-stack.vercel.app"
-    }`;
+    const baseUrl = `https://${process.env.VERCEL_URL || "rnb-tea-clone-full-stack.vercel.app"}`;
     const orderDetailsRaw = req.headers["x-order-details"] || "{}";
     console.log("Order Details Header:", orderDetailsRaw);
     const orderDetails = JSON.parse(orderDetailsRaw);
-    const orderId =
-      orderDetails.orderId ||
-      Math.floor(1000000000 + Math.random() * 9000000000);
+    const orderId = orderDetails.orderId || Math.floor(1000000000 + Math.random() * 9000000000);
     const successUrl = `${baseUrl}/thank-you?orderId=${orderId}`;
     const cancelUrl = `${baseUrl}/checkout`;
 
