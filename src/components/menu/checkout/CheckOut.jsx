@@ -116,11 +116,13 @@ const Checkout = () => {
         basket,
         totalPrice: total,
       };
+      console.log("Saving to sessionStorage:", orderDetailsForSession); // Debug log
       sessionStorage.setItem(
         "orderDetails",
         JSON.stringify(orderDetailsForSession)
       );
 
+      console.log("Basket and FormData:", { basket, formData }); // Debug log
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: {
