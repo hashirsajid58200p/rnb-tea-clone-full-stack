@@ -23,7 +23,8 @@ const ThankYou = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Log environment variables for debugging
+    // Log environment variables and process.env for debugging
+    console.log("Process.env:", process.env);
     console.log("Supabase URL:", supabaseUrl);
     console.log("Supabase Key:", supabaseKey);
 
@@ -84,7 +85,15 @@ const ThankYou = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // Display error message if something goes wrong
+    return (
+      <div className="thank-you-container">
+        <h1>Error</h1>
+        <p>{error}</p>
+        <button className="back-to-menu-btn" onClick={() => navigate("/menu")}>
+          Back to Menu
+        </button>
+      </div>
+    ); // Display error message with navigation
   }
 
   return (
